@@ -14,16 +14,10 @@ run: build
 	@docker run --rm $(img)
 
 install:
-	@mvn install
-
-test:
-	@mvn -e test jacoco:report
-
-integration:
-	@mvn verify
+	@mvn clean install
 
 report:
 	@mvn site
 
 ci:
-	@mvn -P ci -e clean verify
+	@mvn -P ci -e verify
