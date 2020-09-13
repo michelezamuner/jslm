@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<FindBugsFilter>
+    <Match>
+        <Bug pattern="IMC_IMMATURE_CLASS_NO_TOSTRING" />
+    </Match>
+    <Match>
+        <Bug pattern="DRE_DECLARED_RUNTIME_EXCEPTION" />
+    </Match>
+    <Match>
+        <Bug pattern="WEM_WEAK_EXCEPTION_MESSAGING" />
+    </Match>
+</FindBugsFilter>
