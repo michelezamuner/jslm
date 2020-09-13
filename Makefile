@@ -20,4 +20,4 @@ report:
 	@mvn site
 
 ci:
-	@mvn -P ci -e clean verify
+	@mvn -P ci -e verify
