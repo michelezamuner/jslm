@@ -1,0 +1,10 @@
+sudo: required
+language: java
+services:
+    - docker
+before_install:
+    - make build
+script:
+    - make run
+notifications:
+    email: false
