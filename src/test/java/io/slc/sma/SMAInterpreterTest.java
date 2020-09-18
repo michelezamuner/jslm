@@ -49,16 +49,15 @@ public class SMAInterpreterTest
         when(program.getSize()).thenReturn(numberOfInstructions * INSTRUCTION_SIZE);
 
         final Instruction[] instructions = new Instruction[]{ mock(Instruction.class), mock(Instruction.class) };
-        final RuntimeStatus[] statuses = new RuntimeStatus[]{ mock(RuntimeStatus.class), mock(RuntimeStatus.class) };
         final int[] ips = new int[]{ 0, INSTRUCTION_SIZE };
 
         // First instruction, does not jump
         when(fetcher.fetch(program, ips[0])).thenReturn(instructions[0]);
-        when(instructions[0].exec(runtime)).thenReturn(statuses[0]);
+        when(instructions[0].exec(runtime)).thenReturn(runtime);
 
         // Second instruction, does not jump
         when(fetcher.fetch(program, ips[1])).thenReturn(instructions[1]);
-        when(instructions[1].exec(runtime)).thenReturn(statuses[1]);
+        when(instructions[1].exec(runtime)).thenReturn(runtime);
 
         final int actualExitStatus = interpreter.run(program, args);
         assertEquals(exitStatus, actualExitStatus);
@@ -73,18 +72,20 @@ public class SMAInterpreterTest
         when(program.getSize()).thenReturn(numberOfInstructions * INSTRUCTION_SIZE);
 
         final Instruction[] instructions = new Instruction[]{ mock(Instruction.class), mock(Instruction.class) };
-        final RuntimeStatus[] statuses = new RuntimeStatus[]{ mock(RuntimeStatus.class), mock(RuntimeStatus.class) };
+        final Runtime[] runtimes = new Runtime[]{ mock(Runtime.class), mock(Runtime.class), mock(Runtime.class) };
         final int[] ips = new int[]{ 0, INSTRUCTION_SIZE };
+
+        when(loader.load(program, args)).thenReturn(runtimes[0]);
 
         // First instructions, jumps to the next
         when(fetcher.fetch(program, ips[0])).thenReturn(instructions[0]);
-        when(instructions[0].exec(runtime)).thenReturn(statuses[0]);
-        when(statuses[0].shouldJump()).thenReturn(true);
-        when(statuses[0].getJumpAddress()).thenReturn(INSTRUCTION_SIZE);
+        when(instructions[0].exec(runtimes[0])).thenReturn(runtimes[1]);
+        when(runtimes[1].shouldJump()).thenReturn(true);
+        when(runtimes[1].getJumpAddress()).thenReturn(INSTRUCTION_SIZE);
 
         // Second instruction, does not jump
         when(fetcher.fetch(program, ips[1])).thenReturn(instructions[1]);
-        when(instructions[1].exec(runtime)).thenReturn(statuses[1]);
+        when(instructions[1].exec(runtimes[1])).thenReturn(runtimes[2]);
 
         final int actualExitStatus = interpreter.run(program, args);
         assertEquals(exitStatus, actualExitStatus);
@@ -99,18 +100,20 @@ public class SMAInterpreterTest
         when(program.getSize()).thenReturn(numberOfInstructions * INSTRUCTION_SIZE);
 
         final Instruction[] instructions = new Instruction[]{ mock(Instruction.class), mock(Instruction.class) };
-        final RuntimeStatus[] statuses = new RuntimeStatus[]{ mock(RuntimeStatus.class), mock(RuntimeStatus.class) };
+        final Runtime[] runtimes = new Runtime[]{ mock(Runtime.class), mock(Runtime.class), mock(Runtime.class) };
         final int[] ips = new int[]{ 0, INSTRUCTION_SIZE };
+
+        when(loader.load(program, args)).thenReturn(runtimes[0]);
 
         // First instruction, does not jump
         when(fetcher.fetch(program, ips[0])).thenReturn(instructions[0]);
-        when(instructions[0].exec(runtime)).thenReturn(statuses[0]);
+        when(instructions[0].exec(runtimes[0])).thenReturn(runtimes[1]);
 
         // Second instruction, exits
         when(fetcher.fetch(program, ips[1])).thenReturn(instructions[1]);
-        when(instructions[1].exec(runtime)).thenReturn(statuses[1]);
-        when(statuses[1].shouldExit()).thenReturn(true);
-        when(statuses[1].getExitStatus()).thenReturn(exitStatus);
+        when(instructions[1].exec(runtimes[1])).thenReturn(runtimes[2]);
+        when(runtimes[2].shouldExit()).thenReturn(true);
+        when(runtimes[2].getExitStatus()).thenReturn(exitStatus);
 
         final int actualExitStatus = interpreter.run(program, args);
         assertEquals(exitStatus, actualExitStatus);
@@ -124,13 +127,15 @@ public class SMAInterpreterTest
         when(program.getSize()).thenReturn(programSize);
 
         final Instruction instruction = mock(Instruction.class);
-        final RuntimeStatus status = mock(RuntimeStatus.class);
+        final Runtime[] runtimes = new Runtime[]{ mock(Runtime.class), mock(Runtime.class) };
+
+        when(loader.load(program, args)).thenReturn(runtimes[0]);
 
         // Single instruction, jump past end of program
         when(fetcher.fetch(program, 0)).thenReturn(instruction);
-        when(instruction.exec(runtime)).thenReturn(status);
-        when(status.shouldJump()).thenReturn(true);
-        when(status.getJumpAddress()).thenReturn(programSize);
+        when(instruction.exec(runtimes[0])).thenReturn(runtimes[1]);
+        when(runtimes[1].shouldJump()).thenReturn(true);
+        when(runtimes[1].getJumpAddress()).thenReturn(programSize);
 
         final ProgramException exception = assertThrows(ProgramException.class, () -> {
             interpreter.run(program, args);
