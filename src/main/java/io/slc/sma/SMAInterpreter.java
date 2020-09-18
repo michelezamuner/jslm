@@ -1,8 +1,8 @@
 package io.slc.sma;
 
-import io.slc.jslm.interpreter.Program;
-import io.slc.jslm.interpreter.Interpreter;
-import io.slc.jslm.interpreter.ProgramException;
+import io.slc.jsm.interpreter.Program;
+import io.slc.jsm.interpreter.Interpreter;
+import io.slc.jsm.interpreter.ProgramException;
 
 public class SMAInterpreter implements Interpreter
 {

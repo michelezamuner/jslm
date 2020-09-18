@@ -7,11 +7,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>io.slc</groupId>
-    <artifactId>jslm</artifactId>
+    <artifactId>jsm</artifactId>
     <packaging>jar</packaging>
     <version>0.0.1</version>
     <name>Java Sloth Machine</name>
-    <url>https://github.com/michelezamuner/jslm</url>
+    <url>https://github.com/michelezamuner/jsm</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -61,7 +61,7 @@
     </dependencies>
 
     <build>
-        <finalName>jslm</finalName>
+        <finalName>jsm</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

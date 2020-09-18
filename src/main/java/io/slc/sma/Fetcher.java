@@ -1,6 +1,6 @@
 package io.slc.sma;
 
-import io.slc.jslm.interpreter.Program;
+import io.slc.jsm.interpreter.Program;
 
 class Fetcher
 {

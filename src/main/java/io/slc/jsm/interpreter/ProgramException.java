@@ -1,4 +1,4 @@
-package io.slc.jslm.interpreter;
+package io.slc.jsm.interpreter;
 
 public class ProgramException extends RuntimeException
 {
