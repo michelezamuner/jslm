@@ -8,9 +8,9 @@ import static org.mockito.Mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.*;
 
-import io.slc.jslm.interpreter.Program;
-import io.slc.jslm.interpreter.Interpreter;
-import io.slc.jslm.interpreter.ProgramException;
+import io.slc.jsm.interpreter.Program;
+import io.slc.jsm.interpreter.Interpreter;
+import io.slc.jsm.interpreter.ProgramException;
 
 @SuppressWarnings("initialization")
 @ExtendWith(MockitoExtension.class)

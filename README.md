@@ -1,4 +1,4 @@
-# jslm
+# jsm
 
 fetch cycle (fixed instruction size)
     fetch instruction
