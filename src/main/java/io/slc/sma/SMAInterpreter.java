@@ -47,7 +47,7 @@ public class SMAInterpreter implements Interpreter
 
             ip += configuration.getInstructionSize();
             if (ip > maximumAddress) {
-                throw new ProgramException("Missing exit instruction");
+                break;
             }
         }
 
