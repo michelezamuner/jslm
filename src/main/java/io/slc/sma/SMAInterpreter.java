@@ -26,22 +26,22 @@ public class SMAInterpreter implements Interpreter
         int ip = 0;
         int exitStatus = 0;
         final int maximumAddress = program.getSize() - configuration.getInstructionSize();
-        final Runtime runtime = loader.load(program, args);
+        Runtime runtime = loader.load(program, args);
 
         while (true) {
             final Instruction instruction = fetcher.fetch(program, ip);
-            final RuntimeStatus status = instruction.exec(runtime);
+            runtime = instruction.exec(runtime);
 
-            if (status.shouldJump()) {
-                ip = status.getJumpAddress();
+            if (runtime.shouldJump()) {
+                ip = runtime.getJumpAddress();
                 if (ip > maximumAddress) {
                     throw new ProgramException("Invalid jump instruction");
                 }
                 continue;
             }
 
-            if (status.shouldExit()) {
-                exitStatus = status.getExitStatus();
+            if (runtime.shouldExit()) {
+                exitStatus = runtime.getExitStatus();
                 break;
             }
 

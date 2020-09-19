@@ -2,7 +2,7 @@ package io.slc.sma;
 
 class Instruction
 {
-    public RuntimeStatus exec(Runtime runtime)
+    public Runtime exec(final Runtime runtime)
     {
         throw new UnsupportedOperationException("Not implemented yet.");
     }
