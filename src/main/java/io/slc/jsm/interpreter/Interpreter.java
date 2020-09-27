@@ -2,6 +2,6 @@ package io.slc.jsm.interpreter;
 
 public interface Interpreter
 {
-    int run(final Program program, final String... args)
+    int run(final Buffer program, final String... args)
         throws ProgramException;
 }

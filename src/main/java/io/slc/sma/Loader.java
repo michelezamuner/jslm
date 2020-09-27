@@ -1,10 +1,10 @@
 package io.slc.sma;
 
-import io.slc.jsm.interpreter.Program;
+import io.slc.jsm.interpreter.Buffer;
 
 class Loader
 {
-    public Runtime load(Program program, String... args)
+    Runtime load(Buffer program, String... args)
     {
         throw new UnsupportedOperationException("Not implemented yet.");
     }

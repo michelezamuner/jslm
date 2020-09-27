@@ -19,7 +19,7 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <annotatedJdk>${org.checkerframework:jdk8:jar}</annotatedJdk>
         <minimum.coverage>1.00</minimum.coverage>
-        <!-- WARNING! Greater versions of the checker framework cause compilation errors on external files -->
+        <!-- WARNING! Higher versions of the checker framework cause compilation errors on external files -->
         <checkerframework.version>2.10.1</checkerframework.version>
     </properties>
 
@@ -27,6 +27,12 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
+            <version>5.6.2</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-params</artifactId>
             <version>5.6.2</version>
             <scope>test</scope>
         </dependency>
@@ -240,13 +246,15 @@
                                             <element>CLASS</element>
                                             <excludes>
                                                 <!-- TEMPORARILY NOT IMPLEMENTED -->
-                                                <exclude>*Fetcher</exclude>
                                                 <exclude>*Instruction</exclude>
                                                 <exclude>*Loader</exclude>
                                                 <exclude>*Runtime</exclude>
-                                                <exclude>*RuntimeStatus</exclude>
+                                                <exclude>*Syscall</exclude>
                                                 <!-- DTOs -->
                                                 <exclude>*Configuration</exclude>
+                                                <exclude>*Mnemonic</exclude>
+                                                <!-- Factories -->
+                                                <exclude>*InstructionFactory</exclude>
                                             </excludes>
                                             <limits>
                                                 <limit>
