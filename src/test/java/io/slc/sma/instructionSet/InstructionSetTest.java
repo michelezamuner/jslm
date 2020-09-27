@@ -59,5 +59,4 @@ public class InstructionSetTest
             Arguments.of(Arrays.asList(4, 5, 6, 7), 4, Arrays.asList(5, 6, 7))
         );
     }
-
 }
