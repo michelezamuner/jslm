@@ -17,7 +17,7 @@ install:
 	@mvn clean install
 
 report:
-	@mvn site
+	@mvn clean package site
 
 ci:
 	@mvn -P ci -e verify

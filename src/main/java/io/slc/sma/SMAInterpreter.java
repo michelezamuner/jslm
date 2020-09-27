@@ -1,26 +1,27 @@
 package io.slc.sma;
 
-import io.slc.jsm.interpreter.Program;
+import java.util.List;
+
+import io.slc.jsm.interpreter.Buffer;
 import io.slc.jsm.interpreter.Interpreter;
 import io.slc.jsm.interpreter.ProgramException;
+import io.slc.sma.instructionset.InstructionSet;
+import io.slc.sma.instructionset.InvalidInstructionException;
 
 public class SMAInterpreter implements Interpreter
 {
     private final Loader loader;
-    private final Fetcher fetcher;
+    private final InstructionSet instructionSet;
     private final Configuration configuration;
 
-    public SMAInterpreter(
-        final Loader loader,
-        final Fetcher fetcher,
-        final Configuration configuration
-    ) {
+    public SMAInterpreter(final Loader loader, final InstructionSet instructionSet, final Configuration configuration)
+    {
         this.loader = loader;
-        this.fetcher = fetcher;
+        this.instructionSet = instructionSet;
         this.configuration = configuration;
     }
     
-    public int run(final Program program, final String... args)
+    public int run(final Buffer program, final String... args)
         throws ProgramException
     {
         int ip = 0;
@@ -29,13 +30,13 @@ public class SMAInterpreter implements Interpreter
         Runtime runtime = loader.load(program, args);
 
         while (true) {
-            final Instruction instruction = fetcher.fetch(program, ip);
+            final Instruction instruction = fetch(ip, program);
             runtime = instruction.exec(runtime);
 
             if (runtime.shouldJump()) {
                 ip = runtime.getJumpAddress();
                 if (ip > maximumAddress) {
-                    throw new ProgramException("Invalid jump instruction");
+                    throw new ProgramException("Invalid jump");
                 }
                 continue;
             }
@@ -52,5 +53,19 @@ public class SMAInterpreter implements Interpreter
         }
 
         return exitStatus;
+    }
+
+    private Instruction fetch(final int ip, final Buffer program)
+        throws ProgramException
+    {
+        final List<Integer> instructionData = program.read(ip, configuration.getInstructionSize());
+
+        try {
+            return instructionSet.get(instructionData);
+        } catch (InvalidInstructionException e) {
+            // final String message = e.getMessage() == null ? "Invalid instruction" : e.getMessage();
+
+            throw new ProgramException(e.getMessage(), e);
+        }
     }
 }

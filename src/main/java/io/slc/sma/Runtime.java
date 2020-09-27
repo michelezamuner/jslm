@@ -1,23 +1,23 @@
 package io.slc.sma;
 
-class Runtime
+public class Runtime
 {
-    public boolean shouldExit()
+    boolean shouldExit()
     {
         throw new UnsupportedOperationException("Not implemented yet.");
     }
 
-    public int getExitStatus()
+    int getExitStatus()
     {
         throw new UnsupportedOperationException("Not implemented yet.");
     }
 
-    public boolean shouldJump()
+    boolean shouldJump()
     {
         throw new UnsupportedOperationException("Not implemented yet.");
     }
 
-    public int getJumpAddress()
+    int getJumpAddress()
     {
         throw new UnsupportedOperationException("Not implemented yet.");
     }
