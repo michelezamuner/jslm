@@ -1,4 +1,4 @@
-package io.slc.sma;
+package io.slc.jsm.defaultinterpreter;
 
 public interface Instruction
 {

@@ -1,14 +1,16 @@
-package io.slc.sma.instructionset;
+package io.slc.jsm.defaultinstructionset;
 
 import java.util.List;
 
-import io.slc.sma.Instruction;
+import io.slc.jsm.defaultinterpreter.InstructionSet;
+import io.slc.jsm.defaultinterpreter.Instruction;
+import io.slc.jsm.defaultinterpreter.InvalidInstructionException;
 
-public class InstructionSet
+public class DefaultInstructionSet implements InstructionSet
 {
     private final InstructionFactory factory;
 
-    public InstructionSet(final InstructionFactory factory)
+    public DefaultInstructionSet(final InstructionFactory factory)
     {
         this.factory = factory;
     }

@@ -1,7 +1,7 @@
-package io.slc.sma.instructionset.instructions;
+package io.slc.jsm.defaultinstructionset.instructions;
 
-import io.slc.sma.Instruction;
-import io.slc.sma.Runtime;
+import io.slc.jsm.defaultinterpreter.Instruction;
+import io.slc.jsm.defaultinterpreter.Runtime;
 
 public class Syscall implements Instruction
 {

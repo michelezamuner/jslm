@@ -1,20 +1,18 @@
-package io.slc.sma;
+package io.slc.jsm.defaultinterpreter;
 
 import java.util.List;
 
-import io.slc.jsm.interpreter.Buffer;
-import io.slc.jsm.interpreter.Interpreter;
-import io.slc.jsm.interpreter.ProgramException;
-import io.slc.sma.instructionset.InstructionSet;
-import io.slc.sma.instructionset.InvalidInstructionException;
+import io.slc.jsm.vm.interpreter.Buffer;
+import io.slc.jsm.vm.interpreter.Interpreter;
+import io.slc.jsm.vm.interpreter.ProgramException;
 
-public class SMAInterpreter implements Interpreter
+public class DefaultInterpreter implements Interpreter
 {
     private final Loader loader;
     private final InstructionSet instructionSet;
     private final Configuration configuration;
 
-    public SMAInterpreter(final Loader loader, final InstructionSet instructionSet, final Configuration configuration)
+    public DefaultInterpreter(final Loader loader, final InstructionSet instructionSet, final Configuration configuration)
     {
         this.loader = loader;
         this.instructionSet = instructionSet;
@@ -63,8 +61,6 @@ public class SMAInterpreter implements Interpreter
         try {
             return instructionSet.get(instructionData);
         } catch (InvalidInstructionException e) {
-            // final String message = e.getMessage() == null ? "Invalid instruction" : e.getMessage();
-
             throw new ProgramException(e.getMessage(), e);
         }
     }

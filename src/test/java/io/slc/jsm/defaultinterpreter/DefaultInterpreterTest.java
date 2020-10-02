@@ -1,4 +1,4 @@
-package io.slc.sma;
+package io.slc.jsm.defaultinterpreter;
 
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -10,22 +10,20 @@ import org.mockito.*;
 
 import java.util.*;
 
-import io.slc.jsm.interpreter.Buffer;
-import io.slc.jsm.interpreter.Interpreter;
-import io.slc.jsm.interpreter.ProgramException;
-import io.slc.sma.instructionset.InstructionSet;
-import io.slc.sma.instructionset.InvalidInstructionException;
+import io.slc.jsm.vm.interpreter.Buffer;
+import io.slc.jsm.vm.interpreter.Interpreter;
+import io.slc.jsm.vm.interpreter.ProgramException;
 
 @SuppressWarnings({"initialization", "unchecked"})
 @ExtendWith(MockitoExtension.class)
-public class SMAInterpreterTest
+public class DefaultInterpreterTest
 {
     private static final int INSTRUCTION_SIZE = 4;
 
     @Mock private Loader loader;
     @Mock private InstructionSet instructionSet;
     @Mock private Configuration configuration;
-    @InjectMocks private SMAInterpreter interpreter;
+    @InjectMocks private DefaultInterpreter interpreter;
 
     @Mock private Buffer program;
     private final String[] args = new String[]{ "test" };

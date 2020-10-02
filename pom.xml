@@ -246,7 +246,6 @@
                                             <element>CLASS</element>
                                             <excludes>
                                                 <!-- TEMPORARILY NOT IMPLEMENTED -->
-                                                <exclude>*Instruction</exclude>
                                                 <exclude>*Loader</exclude>
                                                 <exclude>*Runtime</exclude>
                                                 <exclude>*Syscall</exclude>
