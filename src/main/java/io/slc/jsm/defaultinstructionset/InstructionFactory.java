@@ -1,8 +1,8 @@
-package io.slc.sma.instructionset;
+package io.slc.jsm.defaultinstructionset;
 
 import java.util.List;
 
-import io.slc.sma.Instruction;
+import io.slc.jsm.defaultinterpreter.Instruction;
 
 class InstructionFactory
 {

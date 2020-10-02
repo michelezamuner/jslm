@@ -1,4 +1,4 @@
-package io.slc.sma.instructionset;
+package io.slc.jsm.defaultinterpreter;
 
 import java.util.List;
 

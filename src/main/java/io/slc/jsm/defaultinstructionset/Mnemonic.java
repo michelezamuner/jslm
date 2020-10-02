@@ -1,7 +1,7 @@
-package io.slc.sma.instructionset;
+package io.slc.jsm.defaultinstructionset;
 
-import io.slc.sma.Instruction;
-import io.slc.sma.instructionset.instructions.Syscall;
+import io.slc.jsm.defaultinterpreter.Instruction;
+import io.slc.jsm.defaultinstructionset.instructions.Syscall;
 
 public enum Mnemonic
 {

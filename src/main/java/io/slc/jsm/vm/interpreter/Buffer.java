@@ -1,4 +1,4 @@
-package io.slc.jsm.interpreter;
+package io.slc.jsm.vm.interpreter;
 
 import java.util.List;
 

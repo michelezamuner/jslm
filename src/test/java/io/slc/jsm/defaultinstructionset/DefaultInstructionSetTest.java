@@ -1,4 +1,4 @@
-package io.slc.sma.instructionset;
+package io.slc.jsm.defaultinstructionset;
 
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -15,18 +15,24 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.stream.Stream;
-import java.lang.IllegalArgumentException;
 
-import io.slc.sma.Instruction;
+import io.slc.jsm.defaultinterpreter.Instruction;
+import io.slc.jsm.defaultinterpreter.InstructionSet;
+import io.slc.jsm.defaultinterpreter.InvalidInstructionException;
 
 @SuppressWarnings("initialization")
 @ExtendWith(MockitoExtension.class)
-public class InstructionSetTest
+public class DefaultInstructionSetTest
 {
     @Mock private InstructionFactory factory;
-    @InjectMocks private InstructionSet instructionSet;
+    @InjectMocks private DefaultInstructionSet instructionSet;
 
     @Mock private Instruction instruction;
+
+    public void isInstructionSet()
+    {
+        assertTrue(instructionSet instanceof InstructionSet);
+    }
 
     @ParameterizedTest
     @MethodSource("provideInstructionsData")
