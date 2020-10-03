@@ -1,12 +1,9 @@
 package io.slc.jsm.defaultinterpreter;
 
+import java.util.List;
+
 public interface Runtime
 {
-    boolean shouldExit();
-    
-    int getExitStatus();
-    
-    boolean shouldJump();
-    
-    int getJumpAddress();
+    ExecutionResult exec(final List<Integer> instruction)
+        throws RuntimeExecutionException;
 }

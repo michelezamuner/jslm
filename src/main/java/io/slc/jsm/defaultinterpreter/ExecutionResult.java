@@ -1,25 +1,23 @@
-package io.slc.jsm.defaultinstructionset;
+package io.slc.jsm.defaultinterpreter;
 
-import io.slc.jsm.defaultinterpreter.Runtime;
-
-public class DefaultRuntime implements Runtime
+public class ExecutionResult
 {
-    public boolean shouldExit()
+    boolean shouldExit()
     {
         throw new UnsupportedOperationException("Not implemented yet");
     }
 
-    public int getExitStatus()
+    int getExitStatus()
     {
         throw new UnsupportedOperationException("Not implemented yet");
     }
 
-    public boolean shouldJump()
+    boolean shouldJump()
     {
         throw new UnsupportedOperationException("Not implemented yet");
     }
 
-    public int getJumpAddress()
+    int getJumpAddress()
     {
         throw new UnsupportedOperationException("Not implemented yet");
     }

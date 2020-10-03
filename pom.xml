@@ -247,13 +247,19 @@
                                             <excludes>
                                                 <!-- TEMPORARILY NOT IMPLEMENTED -->
                                                 <exclude>*Loader</exclude>
-                                                <exclude>*Runtime</exclude>
-                                                <exclude>*Syscall</exclude>
+                                                <exclude>*Syscall*</exclude>
+                                                <exclude>*SyscallExit</exclude>
+                                                <exclude>*Register</exclude>
+                                                <exclude>*VirtualMachine</exclude>
+                                                <exclude>*ExecutionResult</exclude>
                                                 <!-- DTOs -->
                                                 <exclude>*Configuration</exclude>
-                                                <exclude>*Mnemonic</exclude>
                                                 <!-- Factories -->
-                                                <exclude>*InstructionFactory</exclude>
+                                                <exclude>*InstructionSet</exclude>
+                                                <!-- Exceptions -->
+                                                <exclude>*InstructionExecutionException</exclude>
+                                                <exclude>*InvalidInstructionException</exclude>
+                                                <exclude>*RuntimeExecutionException</exclude>
                                             </excludes>
                                             <limits>
                                                 <limit>
