@@ -19,39 +19,6 @@ interpreter
 	exposes generic programming interface, so that clients can be independent from interpreters
 	does not expose any user interface
 
-### interpreter usage
-```java
-Program program = programFileReader.read(filename);
-// All details about how the program is handled are implementation-specific
-ExitStatus exitStatus = interpreter.run(program);
-exit(exitStatus.toInt());
-```
-
-### interpreter interface
-```java
-public interface ExitStatus
-{
-    public int toInt();
-}
-```
-
-A `Program` needs to be fully stored in memory, to support at least jumps, and maybe also self-programming. Thus it makes no sense to provide a stream-like interface.
-```java
-public interface Program
-{
-    public Byte read(Address address);
-    public Byte[] read(Address address, Size size);
-    public Buffer read();
-}
-```
-
-```java
-public interface Interpreter
-{
-    public ExitStatus run(Program program, String[] args);
-}
-```
-
 ### SMA interpreter
 
 The SMA interpreter implementation would support:
@@ -63,37 +30,6 @@ The SMA interpreter implementation would support:
 - static memory, stack and heap
 - runtime arguments loaded onto the stack
 - dedicated module to communicate with the system (except for process and thread handling)
-
-```java
-public class Fetcher
-{
-    public Instruction fetch(Program program, Address address)
-    {
-        Byte[] instructionData = program.read(address, instructionSize);
-        return instructionSet.get(instructionData);
-    }
-}
-```
-```java
-public ExitStatus run(Program program, String[] args)
-{
-    Byte ip = 0x00;
-    // resets registers and memory, stores program data to the static memory, stores args to the stack
-    Runtime runtime = loader.load(program, args);
-
-    while(true) {
-        Instruction instruction = fetcher.fetch(program, ip);
-        RuntimeStatus status = instruction.exec(runtime);
-        if (status.getExitStatus()) {
-            return status.getExitStatus();
-        }
-        ip = ipUpdater.update(ip, status);
-    }
-
-    return status.getExitStatus();
-}
-```
-
 
 ## other
 

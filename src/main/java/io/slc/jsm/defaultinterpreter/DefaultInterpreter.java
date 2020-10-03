@@ -9,42 +9,41 @@ import io.slc.jsm.vm.interpreter.ProgramException;
 public class DefaultInterpreter implements Interpreter
 {
     private final Loader loader;
-    private final InstructionSet instructionSet;
     private final Configuration configuration;
 
-    public DefaultInterpreter(final Loader loader, final InstructionSet instructionSet, final Configuration configuration)
+    public DefaultInterpreter(final Loader loader, final Configuration configuration)
     {
         this.loader = loader;
-        this.instructionSet = instructionSet;
         this.configuration = configuration;
     }
     
     public int run(final Buffer program, final String... args)
         throws ProgramException
     {
+        final int instructionSize = configuration.getInstructionSize();
+        final int maximumAddress = program.getSize() - instructionSize;
+        final Runtime runtime = loader.load(args);
+
         int ip = 0;
         int exitStatus = 0;
-        final int maximumAddress = program.getSize() - configuration.getInstructionSize();
-        Runtime runtime = loader.load(program, args);
-
         while (true) {
-            final Instruction instruction = fetch(ip, program);
-            runtime = instruction.exec(runtime);
-
-            if (runtime.shouldJump()) {
-                ip = runtime.getJumpAddress();
+            final List<Integer> instruction = program.read(ip, instructionSize);
+            final ExecutionResult result = exec(runtime, instruction);
+            
+            if (result.shouldJump()) {
+                ip = result.getJumpAddress();
                 if (ip > maximumAddress) {
                     throw new ProgramException("Invalid jump");
                 }
                 continue;
             }
-
-            if (runtime.shouldExit()) {
-                exitStatus = runtime.getExitStatus();
+                    
+            if (result.shouldExit()) {
+                exitStatus = result.getExitStatus();
                 break;
             }
 
-            ip += configuration.getInstructionSize();
+            ip += instructionSize;
             if (ip > maximumAddress) {
                 break;
             }
@@ -53,14 +52,12 @@ public class DefaultInterpreter implements Interpreter
         return exitStatus;
     }
 
-    private Instruction fetch(final int ip, final Buffer program)
+    private ExecutionResult exec(Runtime runtime, List<Integer> instruction)
         throws ProgramException
     {
-        final List<Integer> instructionData = program.read(ip, configuration.getInstructionSize());
-
         try {
-            return instructionSet.get(instructionData);
-        } catch (InvalidInstructionException e) {
+            return runtime.exec(instruction);
+        } catch (RuntimeExecutionException e) {
             throw new ProgramException(e.getMessage(), e);
         }
     }
