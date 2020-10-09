@@ -1,4 +1,4 @@
-package io.slc.jsm.defaultinterpreter;
+package io.slc.jsm.slc_interpreter;
 
 import java.util.List;
 
@@ -6,12 +6,12 @@ import io.slc.jsm.vm.interpreter.Buffer;
 import io.slc.jsm.vm.interpreter.Interpreter;
 import io.slc.jsm.vm.interpreter.ProgramException;
 
-public class DefaultInterpreter implements Interpreter
+public class SlcInterpreter implements Interpreter
 {
     private final Loader loader;
     private final Configuration configuration;
 
-    public DefaultInterpreter(final Loader loader, final Configuration configuration)
+    public SlcInterpreter(final Loader loader, final Configuration configuration)
     {
         this.loader = loader;
         this.configuration = configuration;

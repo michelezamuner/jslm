@@ -1,4 +1,4 @@
-package io.slc.jsm.defaultruntime;
+package io.slc.jsm.slc_runtime;
 
 public class VirtualMachine
 {

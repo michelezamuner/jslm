@@ -1,9 +1,9 @@
-package io.slc.jsm.defaultruntime;
+package io.slc.jsm.slc_runtime;
 
 // import java.util.Map;
 // import java.util.HashMap;
 
-// import io.slc.jsm.defaultruntime.instructions.Syscall;
+// import io.slc.jsm.slc_runtime.instructions.Syscall;
 
 class InstructionSet
 {

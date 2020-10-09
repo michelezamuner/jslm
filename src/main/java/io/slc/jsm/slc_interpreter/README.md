@@ -1,11 +1,11 @@
-# Default Interpreter
+# SLC Interpreter
 
 ## Dependencies
 - `vm.interpreter`
 
 ## Requirements
-- `defaultinterpreter.Loader`
-- `defaultinterpreter.Runtime`
+- `slc_interpreter.Loader`
+- `slc_interpreter.Runtime`
 
 ## Description
 

@@ -1,4 +1,4 @@
-package io.slc.jsm.defaultruntime;
+package io.slc.jsm.slc_runtime;
 
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -16,17 +16,17 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.stream.Stream;
 
-import io.slc.jsm.defaultinterpreter.Runtime;
-import io.slc.jsm.defaultinterpreter.ExecutionResult;
-import io.slc.jsm.defaultinterpreter.RuntimeExecutionException;
+import io.slc.jsm.slc_interpreter.Runtime;
+import io.slc.jsm.slc_interpreter.ExecutionResult;
+import io.slc.jsm.slc_interpreter.RuntimeExecutionException;
 
 @SuppressWarnings("initialization")
 @ExtendWith(MockitoExtension.class)
-public class DefaultRuntimeTest
+public class SlcRuntimeTest
 {
     @Mock private InstructionSet instructionSet;
     @Mock private VirtualMachine vm;
-    @InjectMocks private DefaultRuntime runtime;
+    @InjectMocks private SlcRuntime runtime;
 
     public void isRuntime()
     {
