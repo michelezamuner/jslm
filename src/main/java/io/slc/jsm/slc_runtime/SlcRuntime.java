@@ -1,17 +1,17 @@
-package io.slc.jsm.defaultruntime;
+package io.slc.jsm.slc_runtime;
 
 import java.util.List;
 
-import io.slc.jsm.defaultinterpreter.Runtime;
-import io.slc.jsm.defaultinterpreter.ExecutionResult;
-import io.slc.jsm.defaultinterpreter.RuntimeExecutionException;
+import io.slc.jsm.slc_interpreter.Runtime;
+import io.slc.jsm.slc_interpreter.ExecutionResult;
+import io.slc.jsm.slc_interpreter.RuntimeExecutionException;
 
-class DefaultRuntime implements Runtime
+class SlcRuntime implements Runtime
 {
     private final InstructionSet instructionSet;
     private final VirtualMachine vm;
 
-    public DefaultRuntime(final InstructionSet instructionSet, final VirtualMachine vm)
+    public SlcRuntime(final InstructionSet instructionSet, final VirtualMachine vm)
     {
         this.instructionSet = instructionSet;
         this.vm = vm;

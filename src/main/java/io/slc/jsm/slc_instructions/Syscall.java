@@ -1,14 +1,14 @@
-package io.slc.jsm.defaultruntime.instructions;
+package io.slc.jsm.slc_instructions;
 
 import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 
-import io.slc.jsm.defaultinterpreter.ExecutionResult;
-import io.slc.jsm.defaultruntime.Instruction;
-import io.slc.jsm.defaultruntime.InstructionExecutionException;
-import io.slc.jsm.defaultruntime.VirtualMachine;
-import io.slc.jsm.defaultruntime.Register;
+import io.slc.jsm.slc_interpreter.ExecutionResult;
+import io.slc.jsm.slc_runtime.Instruction;
+import io.slc.jsm.slc_runtime.InstructionExecutionException;
+import io.slc.jsm.slc_runtime.VirtualMachine;
+import io.slc.jsm.slc_runtime.Register;
 
 public class Syscall implements Instruction
 {

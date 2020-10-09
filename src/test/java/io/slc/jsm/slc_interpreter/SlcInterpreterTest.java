@@ -1,4 +1,4 @@
-package io.slc.jsm.defaultinterpreter;
+package io.slc.jsm.slc_interpreter;
 
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -17,13 +17,13 @@ import io.slc.jsm.vm.interpreter.ProgramException;
 
 @SuppressWarnings({"initialization", "unchecked"})
 @ExtendWith(MockitoExtension.class)
-public class DefaultInterpreterTest
+public class SlcInterpreterTest
 {
     private static final int INSTRUCTION_SIZE = 4;
 
     @Mock private Loader loader;
     @Mock private Configuration configuration;
-    @InjectMocks private DefaultInterpreter interpreter;
+    @InjectMocks private SlcInterpreter interpreter;
 
     @Mock private Buffer program;
     private final String[] args = new String[]{ "test" };
