@@ -253,6 +253,7 @@
                                                 <exclude>*Configuration</exclude>
                                                 <!-- Factories -->
                                                 <exclude>*InstructionSet</exclude>
+                                                <!-- Proxies -->
                                                 <exclude>*Syscall</exclude>
                                                 <!-- Exceptions (because of null hack) -->
                                                 <exclude>*InstructionExecutionException</exclude>
