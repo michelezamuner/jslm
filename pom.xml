@@ -247,16 +247,15 @@
                                             <excludes>
                                                 <!-- TEMPORARILY NOT IMPLEMENTED -->
                                                 <exclude>*Loader</exclude>
-                                                <exclude>*Syscall*</exclude>
-                                                <exclude>*SyscallExit</exclude>
                                                 <exclude>*Register</exclude>
                                                 <exclude>*VirtualMachine</exclude>
-                                                <exclude>*ExecutionResult</exclude>
                                                 <!-- DTOs -->
                                                 <exclude>*Configuration</exclude>
                                                 <!-- Factories -->
                                                 <exclude>*InstructionSet</exclude>
-                                                <!-- Exceptions -->
+                                                <!-- Proxies -->
+                                                <exclude>*Syscall</exclude>
+                                                <!-- Exceptions (because of null hack) -->
                                                 <exclude>*InstructionExecutionException</exclude>
                                                 <exclude>*InvalidInstructionException</exclude>
                                                 <exclude>*RuntimeExecutionException</exclude>

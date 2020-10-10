@@ -2,23 +2,56 @@ package io.slc.jsm.slc_interpreter;
 
 public class ExecutionResult
 {
-    boolean shouldExit()
+    private boolean shouldExit;
+    private int exitStatus;
+    private boolean shouldJump;
+    private int jumpAddress;
+
+    public static ExecutionResult exit(final int exitStatus)
     {
-        throw new UnsupportedOperationException("Not implemented yet");
+        final ExecutionResult result = new ExecutionResult();
+        result.shouldExit = true;
+        result.exitStatus = exitStatus;
+
+        return result;
     }
 
-    int getExitStatus()
+    public static ExecutionResult jump(final int jumpAddress)
     {
-        throw new UnsupportedOperationException("Not implemented yet");
+        final ExecutionResult result = new ExecutionResult();
+        result.shouldJump = true;
+        result.jumpAddress = jumpAddress;
+
+        return result;
     }
 
-    boolean shouldJump()
+    private ExecutionResult()
     {
-        throw new UnsupportedOperationException("Not implemented yet");
     }
 
-    int getJumpAddress()
+    public boolean shouldExit()
     {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return shouldExit;
+    }
+
+    public int getExitStatus()
+    {
+        if (!shouldExit()) {
+            throw new RuntimeException("No exit has been set");
+        }
+        return exitStatus;
+    }
+
+    public boolean shouldJump()
+    {
+        return shouldJump;
+    }
+
+    public int getJumpAddress()
+    {
+        if (!shouldJump()) {
+            throw new RuntimeException("No jump has been set");
+        }
+        return jumpAddress;
     }
 }
