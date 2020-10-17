@@ -1,14 +1,14 @@
-package io.slc.jsm.slc_instructions.syscall;
+package io.slc.jsm.slc_instruction_set.instructions.syscall;
 
 import java.util.Map;
 import java.util.HashMap;
 
-import io.slc.jsm.slc_runtime.Instruction;
-import io.slc.jsm.slc_runtime.VirtualMachine;
-import io.slc.jsm.slc_runtime.Register;
-import io.slc.jsm.slc_runtime.InstructionExecutionException;
+import io.slc.jsm.slc_runtime.instruction_set.Instruction;
+import io.slc.jsm.slc_runtime.instruction_set.InstructionExecutionException;
+import io.slc.jsm.slc_runtime.virtual_machine.VirtualMachine;
+import io.slc.jsm.slc_runtime.virtual_machine.Register;
 
-class SyscallMap
+public class SyscallMap
 {
     static final int SYSCALL_EXIT_CODE = 1;
 
@@ -17,7 +17,7 @@ class SyscallMap
         put(SYSCALL_EXIT_CODE, SyscallExit.class);
     }};
 
-    Class<? extends Instruction> get(final VirtualMachine vm)
+    public Class<? extends Instruction> get(final VirtualMachine vm)
         throws InstructionExecutionException
     {
         final int syscallCode = vm.readRegister(Register.EAX);

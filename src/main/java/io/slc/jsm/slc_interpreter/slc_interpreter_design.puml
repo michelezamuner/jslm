@@ -1,0 +1,27 @@
+@startuml "SLC Interpreter design"
+
+package vm.interpreter {
+    interface Interpreter
+    class Buffer
+}
+
+package slc_interpreter {
+    class SlcInterpreter
+    class Configuration
+
+    package runtime {
+        interface Loader
+        interface Runtime
+        class ExecutionResult
+
+        Loader --> Runtime : creates
+        Runtime --> ExecutionResult : produces
+    }
+
+    SlcInterpreter --|> Interpreter
+    SlcInterpreter --o Loader
+    SlcInterpreter --o Configuration
+    SlcInterpreter --> Buffer : runs with
+}
+
+@enduml

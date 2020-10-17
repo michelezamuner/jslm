@@ -1,4 +1,4 @@
-package io.slc.jsm.slc_instructions.syscall;
+package io.slc.jsm.slc_instruction_set.instructions.syscall;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -8,9 +8,9 @@ import static org.mockito.Mockito.when;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.Mock;
 
-import io.slc.jsm.slc_runtime.VirtualMachine;
-import io.slc.jsm.slc_runtime.Register;
-import io.slc.jsm.slc_runtime.InstructionExecutionException;
+import io.slc.jsm.slc_runtime.virtual_machine.VirtualMachine;
+import io.slc.jsm.slc_runtime.virtual_machine.Register;
+import io.slc.jsm.slc_runtime.instruction_set.InstructionExecutionException;
 
 @SuppressWarnings({"initialization"})
 @ExtendWith(MockitoExtension.class)
@@ -21,7 +21,7 @@ public class SyscallMapTest
     @Mock private VirtualMachine vm;
 
     @Test
-    public void supportsSyscallExit()
+    public void producesSyscallInstructionFromEAXRegister()
         throws InstructionExecutionException
     {
         when(vm.readRegister(Register.EAX)).thenReturn(SyscallMap.SYSCALL_EXIT_CODE);

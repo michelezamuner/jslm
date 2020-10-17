@@ -1,4 +1,4 @@
-package io.slc.jsm.slc_instructions.syscall;
+package io.slc.jsm.slc_instruction_set.instructions.syscall;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -11,11 +11,11 @@ import org.mockito.Mock;
 import java.util.List;
 import java.util.ArrayList;
 
-import io.slc.jsm.slc_interpreter.ExecutionResult;
-import io.slc.jsm.slc_runtime.Instruction;
-import io.slc.jsm.slc_runtime.VirtualMachine;
-import io.slc.jsm.slc_runtime.Register;
-import io.slc.jsm.slc_runtime.InstructionExecutionException;
+import io.slc.jsm.slc_interpreter.runtime.ExecutionResult;
+import io.slc.jsm.slc_runtime.instruction_set.Instruction;
+import io.slc.jsm.slc_runtime.instruction_set.InstructionExecutionException;
+import io.slc.jsm.slc_runtime.virtual_machine.VirtualMachine;
+import io.slc.jsm.slc_runtime.virtual_machine.Register;
 
 @SuppressWarnings({"initialization"})
 @ExtendWith(MockitoExtension.class)

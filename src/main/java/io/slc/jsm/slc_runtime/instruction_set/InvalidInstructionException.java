@@ -1,15 +1,15 @@
-package io.slc.jsm.slc_runtime;
+package io.slc.jsm.slc_runtime.instruction_set;
 
-public class InstructionExecutionException extends Exception
+public class InvalidInstructionException extends Exception
 {
     private static final long serialVersionUID = 1L;
 
-    public InstructionExecutionException(final String message)
+    public InvalidInstructionException(final String message)
     {
         super(message);
     }
 
-    public InstructionExecutionException(final String message, final Throwable err)
+    public InvalidInstructionException(final String message, final Throwable err)
     {
         super(message, err);
     }

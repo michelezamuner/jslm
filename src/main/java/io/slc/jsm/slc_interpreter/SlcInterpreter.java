@@ -6,6 +6,11 @@ import io.slc.jsm.vm.interpreter.Buffer;
 import io.slc.jsm.vm.interpreter.Interpreter;
 import io.slc.jsm.vm.interpreter.ProgramException;
 
+import io.slc.jsm.slc_interpreter.runtime.Loader;
+import io.slc.jsm.slc_interpreter.runtime.Runtime;
+import io.slc.jsm.slc_interpreter.runtime.ExecutionResult;
+import io.slc.jsm.slc_interpreter.runtime.RuntimeExecutionException;
+
 public class SlcInterpreter implements Interpreter
 {
     private final Loader loader;
