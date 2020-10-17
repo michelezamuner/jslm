@@ -2,9 +2,14 @@ package io.slc.jsm.slc_runtime;
 
 import java.util.List;
 
-import io.slc.jsm.slc_interpreter.Runtime;
-import io.slc.jsm.slc_interpreter.ExecutionResult;
-import io.slc.jsm.slc_interpreter.RuntimeExecutionException;
+import io.slc.jsm.slc_interpreter.runtime.Runtime;
+import io.slc.jsm.slc_interpreter.runtime.ExecutionResult;
+import io.slc.jsm.slc_interpreter.runtime.RuntimeExecutionException;
+import io.slc.jsm.slc_runtime.virtual_machine.VirtualMachine;
+import io.slc.jsm.slc_runtime.instruction_set.InstructionSet;
+import io.slc.jsm.slc_runtime.instruction_set.Instruction;
+import io.slc.jsm.slc_runtime.instruction_set.InvalidInstructionException;
+import io.slc.jsm.slc_runtime.instruction_set.InstructionExecutionException;
 
 class SlcRuntime implements Runtime
 {

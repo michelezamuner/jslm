@@ -1,0 +1,21 @@
+@startuml "SLC Instruction Set design"
+
+package slc_runtime.instruction_set {
+    interface InstructionSet
+    interface Instruction
+}
+
+package slc_instruction_set {
+    class SlcInstructionSet
+
+    package instructions {
+        class Syscall
+
+        Syscall --|> Instruction
+    }
+
+    SlcInstructionSet --|> InstructionSet
+    SlcInstructionSet --> Syscall : creates
+}
+
+@enduml

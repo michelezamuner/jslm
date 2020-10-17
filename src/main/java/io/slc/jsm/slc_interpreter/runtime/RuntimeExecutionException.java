@@ -1,4 +1,4 @@
-package io.slc.jsm.slc_interpreter;
+package io.slc.jsm.slc_interpreter.runtime;
 
 public class RuntimeExecutionException extends Exception
 {

@@ -16,9 +16,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.stream.Stream;
 
-import io.slc.jsm.slc_interpreter.Runtime;
-import io.slc.jsm.slc_interpreter.ExecutionResult;
-import io.slc.jsm.slc_interpreter.RuntimeExecutionException;
+import io.slc.jsm.slc_interpreter.runtime.Runtime;
+import io.slc.jsm.slc_interpreter.runtime.ExecutionResult;
+import io.slc.jsm.slc_interpreter.runtime.RuntimeExecutionException;
+
+import io.slc.jsm.slc_runtime.virtual_machine.VirtualMachine;
+import io.slc.jsm.slc_runtime.instruction_set.InstructionSet;
+import io.slc.jsm.slc_runtime.instruction_set.Instruction;
+import io.slc.jsm.slc_runtime.instruction_set.InvalidInstructionException;
+import io.slc.jsm.slc_runtime.instruction_set.InstructionExecutionException;
 
 @SuppressWarnings("initialization")
 @ExtendWith(MockitoExtension.class)
@@ -77,7 +83,6 @@ public class SlcRuntimeTest
         final int opcode = 0;
         final List<Integer> operands = Arrays.asList(1, 2, 3);
         final Instruction instruction = mock(Instruction.class);
-        final ExecutionResult result = mock(ExecutionResult.class);
 
         when(instructionSet.get(opcode)).thenReturn(instruction);
         when(instruction.exec(vm, operands)).thenThrow(originalException);

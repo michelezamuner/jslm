@@ -2,10 +2,11 @@ package io.slc.jsm.slc_instructions.syscall;
 
 import java.util.List;
 
-import io.slc.jsm.slc_interpreter.ExecutionResult;
-import io.slc.jsm.slc_runtime.Instruction;
-import io.slc.jsm.slc_runtime.VirtualMachine;
-import io.slc.jsm.slc_runtime.InstructionExecutionException;
+import io.slc.jsm.slc_interpreter.runtime.ExecutionResult;
+import io.slc.jsm.slc_runtime.instruction_set.Instruction;
+import io.slc.jsm.slc_runtime.instruction_set.InstructionExecutionException;
+import io.slc.jsm.slc_runtime.virtual_machine.VirtualMachine;
+import io.slc.jsm.slc_instruction_set.instructions.syscall.SyscallMap;
 
 public class Syscall implements Instruction
 {

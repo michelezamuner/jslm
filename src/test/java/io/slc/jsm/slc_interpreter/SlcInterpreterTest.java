@@ -15,6 +15,11 @@ import io.slc.jsm.vm.interpreter.Buffer;
 import io.slc.jsm.vm.interpreter.Interpreter;
 import io.slc.jsm.vm.interpreter.ProgramException;
 
+import io.slc.jsm.slc_interpreter.runtime.Loader;
+import io.slc.jsm.slc_interpreter.runtime.Runtime;
+import io.slc.jsm.slc_interpreter.runtime.ExecutionResult;
+import io.slc.jsm.slc_interpreter.runtime.RuntimeExecutionException;
+
 @SuppressWarnings({"initialization", "unchecked"})
 @ExtendWith(MockitoExtension.class)
 public class SlcInterpreterTest
@@ -53,7 +58,7 @@ public class SlcInterpreterTest
 
         final int[] ips = new int[]{ 0, INSTRUCTION_SIZE };
         final List<List<Integer>> instructions = Arrays.asList(mock(List.class), mock(List.class));
-        final ExecutionResult[] results = new ExecutionResult[]{ mock(ExecutionResult.class), mock(ExecutionResult.class) };
+        final ExecutionResult[] results = { mock(ExecutionResult.class), mock(ExecutionResult.class) };
 
         // First instruction, does not jump
         when(program.read(ips[0], INSTRUCTION_SIZE)).thenReturn(instructions.get(0));
@@ -78,7 +83,7 @@ public class SlcInterpreterTest
 
         final int[] ips = new int[]{ 0, INSTRUCTION_SIZE };
         final List<List<Integer>> instructions = Arrays.asList(mock(List.class), mock(List.class));
-        final ExecutionResult[] results = new ExecutionResult[]{ mock(ExecutionResult.class), mock(ExecutionResult.class) };
+        final ExecutionResult[] results = { mock(ExecutionResult.class), mock(ExecutionResult.class) };
 
         // First instructions, jumps to the next
         when(program.read(ips[0], INSTRUCTION_SIZE)).thenReturn(instructions.get(0));
@@ -105,7 +110,7 @@ public class SlcInterpreterTest
 
         final int[] ips = new int[]{ 0, INSTRUCTION_SIZE };
         final List<List<Integer>> instructions = Arrays.asList(mock(List.class), mock(List.class));
-        final ExecutionResult[] results = new ExecutionResult[]{ mock(ExecutionResult.class), mock(ExecutionResult.class) };
+        final ExecutionResult[] results = { mock(ExecutionResult.class), mock(ExecutionResult.class) };
 
         // First instruction, does not jump
         when(program.read(ips[0], INSTRUCTION_SIZE)).thenReturn(instructions.get(0));
