@@ -7,6 +7,27 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ExecutionResultTest
 {
     @Test
+    public void instructsToProceed()
+    {
+        final ExecutionResult result = ExecutionResult.proceed();
+
+        assertFalse(result.shouldExit());
+        assertFalse(result.shouldJump());
+
+        RuntimeException exception = null;
+
+        exception = assertThrows(RuntimeException.class, () -> {
+            result.getExitStatus();
+        });
+        assertEquals("No exit has been set", exception.getMessage());
+
+        exception = assertThrows(RuntimeException.class, () -> {
+            result.getJumpAddress();
+        });
+        assertEquals("No jump has been set", exception.getMessage());
+    }
+
+    @Test
     public void instructsToExit()
     {
         final int exitStatus = 192;

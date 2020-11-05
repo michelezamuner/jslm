@@ -6,6 +6,11 @@ public class ExecutionResult
     private int exitStatus;
     private boolean shouldJump;
     private int jumpAddress;
+    
+    public static ExecutionResult proceed()
+    {
+        return new ExecutionResult();
+    }
 
     public static ExecutionResult exit(final int exitStatus)
     {
