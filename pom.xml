@@ -246,13 +246,11 @@
                                             <element>CLASS</element>
                                             <excludes>
                                                 <!-- TEMPORARILY NOT IMPLEMENTED -->
-                                                <exclude>*SlcLoader</exclude>
-                                                <exclude>*VirtualMachine</exclude>
+                                                <exclude>*SlcRuntime</exclude>
                                                 <!-- DTOs -->
-                                                <exclude>*Configuration</exclude>
                                                 <!-- Factories -->
-                                                <exclude>*InstructionSet</exclude>
-                                                <!-- Proxies -->
+                                                <exclude>*SlcInstructionSet</exclude>
+                                                <!-- Proxies/Decorators -->
                                                 <exclude>*Syscall</exclude>
                                                 <!-- Exceptions (because of null hack) -->
                                                 <exclude>*InstructionExecutionException</exclude>

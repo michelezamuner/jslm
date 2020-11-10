@@ -11,11 +11,11 @@ import org.mockito.Mock;
 import java.util.List;
 import java.util.ArrayList;
 
-import io.slc.jsm.slc_interpreter.runtime.ExecutionResult;
-import io.slc.jsm.slc_runtime.instruction_set.Instruction;
-import io.slc.jsm.slc_runtime.instruction_set.InstructionExecutionException;
-import io.slc.jsm.slc_runtime.virtual_machine.VirtualMachine;
-import io.slc.jsm.slc_runtime.virtual_machine.Register;
+import io.slc.jsm.slc_runtime.Register;
+import io.slc.jsm.slc_runtime.SlcRuntime;
+import io.slc.jsm.slc_instruction_set.SlcInstruction;
+import io.slc.jsm.slc_interpreter.ExecutionResult;
+import io.slc.jsm.slc_interpreter.InstructionExecutionException;
 
 @SuppressWarnings({"initialization"})
 @ExtendWith(MockitoExtension.class)
@@ -23,12 +23,12 @@ public class SyscallExitTest
 {
     private SyscallExit instruction = new SyscallExit();
 
-    @Mock private VirtualMachine vm;
+    @Mock private SlcRuntime runtime;
 
     @Test
     public void isInstruction()
     {
-        assertTrue(instruction instanceof Instruction);
+        assertTrue(instruction instanceof SlcInstruction);
     }
 
     @Test
@@ -37,9 +37,9 @@ public class SyscallExitTest
     {
         final List<Integer> operands = new ArrayList<>();
         final int exitStatus = 192;
-        when(vm.readRegister(Register.EBX)).thenReturn(exitStatus);
+        when(runtime.readRegister(Register.EBX)).thenReturn(exitStatus);
 
-        final ExecutionResult result = instruction.exec(vm, operands);
+        final ExecutionResult result = instruction.exec(runtime, operands);
         assertTrue(result.shouldExit());
         assertEquals(exitStatus, result.getExitStatus());
     }

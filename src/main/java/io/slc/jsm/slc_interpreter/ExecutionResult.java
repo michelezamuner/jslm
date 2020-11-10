@@ -1,4 +1,4 @@
-package io.slc.jsm.slc_interpreter.runtime;
+package io.slc.jsm.slc_interpreter;
 
 public class ExecutionResult
 {

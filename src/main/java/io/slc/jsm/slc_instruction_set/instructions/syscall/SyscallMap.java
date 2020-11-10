@@ -3,25 +3,25 @@ package io.slc.jsm.slc_instruction_set.instructions.syscall;
 import java.util.Map;
 import java.util.HashMap;
 
-import io.slc.jsm.slc_runtime.instruction_set.Instruction;
-import io.slc.jsm.slc_runtime.instruction_set.InstructionExecutionException;
-import io.slc.jsm.slc_runtime.virtual_machine.VirtualMachine;
-import io.slc.jsm.slc_runtime.virtual_machine.Register;
+import io.slc.jsm.slc_interpreter.InstructionExecutionException;
+import io.slc.jsm.slc_runtime.SlcRuntime;
+import io.slc.jsm.slc_runtime.Register;
+import io.slc.jsm.slc_instruction_set.SlcInstruction;
 
 public class SyscallMap
 {
     static final int SYSCALL_EXIT_CODE = 1;
 
     @SuppressWarnings("serial")
-    private static final Map<Integer, Class<? extends Instruction>> syscalls = new HashMap<Integer, Class<? extends Instruction>>() {{
+    private static final Map<Integer, Class<? extends SlcInstruction>> syscalls = new HashMap<Integer, Class<? extends SlcInstruction>>() {{
         put(SYSCALL_EXIT_CODE, SyscallExit.class);
     }};
 
-    public Class<? extends Instruction> get(final VirtualMachine vm)
+    public Class<? extends SlcInstruction> get(final SlcRuntime runtime)
         throws InstructionExecutionException
     {
-        final int syscallCode = vm.readRegister(Register.EAX);
-        final Class<? extends Instruction> syscallClass = syscalls.get(syscallCode);
+        final int syscallCode = runtime.readRegister(Register.EAX);
+        final Class<? extends SlcInstruction> syscallClass = syscalls.get(syscallCode);
         if (syscallClass == null) {
             throw new InstructionExecutionException("Invalid syscall code: " + syscallCode);
         }
