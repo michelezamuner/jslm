@@ -6,22 +6,20 @@ package vm.interpreter {
 }
 
 package slc_interpreter {
-    class SlcInterpreter
-    class Configuration
-
-    package runtime {
-        interface Loader
-        interface Runtime
-        class ExecutionResult
-
-        Loader --> Runtime : creates
-        Runtime --> ExecutionResult : produces
-    }
+    class SlcInterpreter<R extends Runtime>
+    interface Loader<R extends Runtime>
+    interface InstructionSet<R extends Runtime>
+    interface Instruction<R extends Runtime>
+    interface Runtime
+    class ExecutionResult
 
     SlcInterpreter --|> Interpreter
-    SlcInterpreter --o Loader
-    SlcInterpreter --o Configuration
+    SlcInterpreter o-- Loader
+    SlcInterpreter o-- InstructionSet
     SlcInterpreter --> Buffer : runs with
+    Loader --> Runtime : initializes
+    InstructionSet *-- "n" Instruction
+    Instruction --> ExecutionResult : produces
 }
 
 @enduml

@@ -1,20 +1,28 @@
 @startuml "SLC Instruction Set design"
 
-package slc_runtime.instruction_set {
-    interface InstructionSet
-    interface Instruction
+package slc_interpreter {
+    interface InstructionSet<R extends Runtime>
+    interface Instruction<R extends Runtime>
+}
+
+package slc_runtime {
+    class SlcRuntime
 }
 
 package slc_instruction_set {
+    interface SlcInstruction
     class SlcInstructionSet
 
     package instructions {
         class Syscall
 
-        Syscall --|> Instruction
+        Syscall --|> SlcInstruction
     }
 
+    SlcInstruction --|> Instruction
+    SlcInstruction *-- SlcRuntime
     SlcInstructionSet --|> InstructionSet
+    SlcInstructionSet *-- SlcRuntime
     SlcInstructionSet --> Syscall : creates
 }
 

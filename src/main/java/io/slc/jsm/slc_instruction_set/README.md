@@ -2,13 +2,14 @@
 
 ## Dependencies
 
-- `slc_runtime.instruction_set.InstructionSet`
-- `slc_runtime.instruction_set.Instruction`
+- `slc_runtime.SlcRuntime`
+- `slc_interpreter.InstructionSet`
+- `slc_interpreter.Instruction`
 
 
 ## Description
 
-This module provides implementations for the `slc_runtime.instruction_set` port, including a `SlcInstructionSet` component, representing a factory that creates specific instruction handlers, and many different implementations of `Instruction`, like `Syscall`, each representing a specific instruction handler.
+This module provides an implementation for the `slc_interpreter.InstructionSet` and `slc_interpreter.Instruction` generic interfaces, for the specific runtime `slc_runtime.SlcRuntime`. The module includes a `SlcInstructionSet` component that represents a factory that creates instruction executors, and implementations of `slc_interpreter.Instruction`, like `Syscall`, each representing a specific instruction executor.
 
 ## Design
 

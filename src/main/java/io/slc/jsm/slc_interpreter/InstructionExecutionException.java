@@ -1,4 +1,4 @@
-package io.slc.jsm.slc_runtime.instruction_set;
+package io.slc.jsm.slc_interpreter;
 
 public class InstructionExecutionException extends Exception
 {
@@ -9,15 +9,15 @@ public class InstructionExecutionException extends Exception
         super(message);
     }
 
-    public InstructionExecutionException(final String message, final Throwable err)
+    public InstructionExecutionException(final String message, final Throwable cause)
     {
-        super(message, err);
+        super(message, cause);
     }
 
     public String getMessage()
     {
         final String message = super.getMessage();
-
+        
         return message != null ? message : "";
     }
 }

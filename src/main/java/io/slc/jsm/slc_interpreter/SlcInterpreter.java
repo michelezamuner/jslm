@@ -6,45 +6,45 @@ import io.slc.jsm.vm.interpreter.Buffer;
 import io.slc.jsm.vm.interpreter.Interpreter;
 import io.slc.jsm.vm.interpreter.ProgramException;
 
-import io.slc.jsm.slc_interpreter.runtime.Loader;
-import io.slc.jsm.slc_interpreter.runtime.Runtime;
-import io.slc.jsm.slc_interpreter.runtime.ExecutionResult;
-import io.slc.jsm.slc_interpreter.runtime.RuntimeExecutionException;
-
-public class SlcInterpreter implements Interpreter
+public class SlcInterpreter<R extends Runtime> implements Interpreter
 {
-    private final Loader loader;
-    private final Configuration configuration;
+    private final Loader<R> loader;
+    private final InstructionSet<R> instructionSet;
 
-    public SlcInterpreter(final Loader loader, final Configuration configuration)
+    public SlcInterpreter(final Loader<R> loader, final InstructionSet<R> instructionSet)
     {
         this.loader = loader;
-        this.configuration = configuration;
+        this.instructionSet = instructionSet;
     }
-    
+
     public int run(final Buffer program, final String... args)
         throws ProgramException
     {
-        final int instructionSize = configuration.getInstructionSize();
+        final R runtime = loader.load(args);
+        final int instructionSize = instructionSet.getInstructionSize();
         final int maximumAddress = program.getSize() - instructionSize;
-        final Runtime runtime = loader.load(args);
 
         int ip = 0;
         int exitStatus = 0;
         while (true) {
-            final List<Integer> instruction = program.read(ip, instructionSize);
-            final ExecutionResult result = exec(runtime, instruction);
-            
+            final List<Integer> instructionData = program.read(ip, instructionSize);
+            final int opcode = instructionData.get(0);
+            final List<Integer> operands = instructionData.subList(1, instructionSize);
+            final Instruction<R> instruction = getInstruction(opcode);
+            final ExecutionResult result = exec(instruction, runtime, operands);
+
             if (result.shouldJump()) {
                 ip = result.getJumpAddress();
                 if (ip > maximumAddress) {
-                    throw new ProgramException("Invalid jump");
+                    throw new ProgramException(String.format("Invalid jump to address %d", ip));
                 }
+
                 continue;
             }
-                    
+
             if (result.shouldExit()) {
                 exitStatus = result.getExitStatus();
+
                 break;
             }
 
@@ -57,12 +57,22 @@ public class SlcInterpreter implements Interpreter
         return exitStatus;
     }
 
-    private ExecutionResult exec(Runtime runtime, List<Integer> instruction)
+    private Instruction<R> getInstruction(final int opcode)
         throws ProgramException
     {
         try {
-            return runtime.exec(instruction);
-        } catch (RuntimeExecutionException e) {
+            return instructionSet.get(opcode);
+        } catch (InvalidInstructionException e) {
+            throw new ProgramException(e.getMessage(), e);
+        }
+    }
+
+    private ExecutionResult exec(final Instruction<R> instruction, final R runtime, final List<Integer> operands)
+        throws ProgramException
+    {
+        try {
+            return instruction.exec(runtime, operands);
+        } catch (InstructionExecutionException e) {
             throw new ProgramException(e.getMessage(), e);
         }
     }

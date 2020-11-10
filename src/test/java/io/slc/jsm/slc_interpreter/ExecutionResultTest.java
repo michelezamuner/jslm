@@ -1,4 +1,4 @@
-package io.slc.jsm.slc_interpreter.runtime;
+package io.slc.jsm.slc_interpreter;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;

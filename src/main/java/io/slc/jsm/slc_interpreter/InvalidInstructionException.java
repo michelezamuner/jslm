@@ -1,4 +1,4 @@
-package io.slc.jsm.slc_runtime.instruction_set;
+package io.slc.jsm.slc_interpreter;
 
 public class InvalidInstructionException extends Exception
 {
@@ -9,15 +9,15 @@ public class InvalidInstructionException extends Exception
         super(message);
     }
 
-    public InvalidInstructionException(final String message, final Throwable err)
+    public InvalidInstructionException(final String message, final Throwable cause)
     {
-        super(message, err);
+        super(message, cause);
     }
 
     public String getMessage()
     {
         final String message = super.getMessage();
-
+        
         return message != null ? message : "";
     }
 }
