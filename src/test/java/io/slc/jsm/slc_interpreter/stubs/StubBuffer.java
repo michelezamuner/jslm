@@ -7,7 +7,7 @@ import io.slc.jsm.vm.interpreter.Buffer;
 
 public class StubBuffer implements Buffer
 {
-    private List<Integer> bytes;
+    private final List<Integer> bytes;
 
     public StubBuffer(final int[] bytes)
     {

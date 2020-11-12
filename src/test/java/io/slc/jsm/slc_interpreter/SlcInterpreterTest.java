@@ -92,7 +92,7 @@ public class SlcInterpreterTest
 
         final int ip = 0;
         final List<Integer> instructionData = Arrays.asList(0, 1, 2, 3);
-        
+
         // Single instruction, fails to retrieve instruction
         when(program.read(ip, INSTRUCTION_SIZE)).thenReturn(instructionData);
         when(instructionSet.get(instructionData.get(0))).thenThrow(originalException);

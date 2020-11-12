@@ -9,11 +9,13 @@ public class SlcInstructionSet implements InstructionSet<SlcRuntime>
 {
     private static final int INSTRUCTION_SIZE = 4;
 
+    @Override
     public int getInstructionSize()
     {
         return INSTRUCTION_SIZE;
     }
 
+    @Override
     public Instruction<SlcRuntime> get(final int opcode)
         throws InvalidInstructionException
     {

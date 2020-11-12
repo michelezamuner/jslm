@@ -17,6 +17,7 @@ public class SlcInterpreter<R extends Runtime> implements Interpreter
         this.instructionSet = instructionSet;
     }
 
+    @Override
     public int run(final Buffer program, final String... args)
         throws ProgramException
     {

@@ -1,7 +1,7 @@
 package io.slc.jsm.slc_interpreter;
 
-import org.junit.jupiter.api.*;
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import io.slc.jsm.vm.interpreter.Buffer;
 import io.slc.jsm.vm.interpreter.ProgramException;

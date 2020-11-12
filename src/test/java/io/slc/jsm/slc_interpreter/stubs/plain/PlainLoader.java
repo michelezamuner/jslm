@@ -4,11 +4,9 @@ import io.slc.jsm.slc_interpreter.Loader;
 
 public class PlainLoader implements Loader<PlainRuntime>
 {
+    @Override
     public PlainRuntime load(final String... args)
     {
-        final PlainRuntime runtime = new PlainRuntime();
-        runtime.setExitStatus(Integer.parseInt(args[0]));
-        
-        return runtime;
+        return new PlainRuntime(Integer.parseInt(args[0]));
     }
 }

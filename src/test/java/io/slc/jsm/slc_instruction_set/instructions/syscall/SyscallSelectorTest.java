@@ -2,7 +2,8 @@ package io.slc.jsm.slc_instruction_set.instructions.syscall;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import static org.mockito.Mockito.when;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -15,19 +16,18 @@ import org.mockito.Mock;
 
 @SuppressWarnings({"initialization"})
 @ExtendWith(MockitoExtension.class)
-public class SyscallMapTest
+public class SyscallSelectorTest
 {
-    private SyscallMap map = new SyscallMap();
-
+    private final SyscallSelector selector = new SyscallSelector();
     @Mock private SlcRuntime runtime;
 
     @Test
     public void producesSyscallInstructionFromEAXRegister()
         throws InstructionExecutionException
     {
-        when(runtime.readRegister(Register.EAX)).thenReturn(SyscallMap.SYSCALL_EXIT_CODE);
+        when(runtime.readRegister(Register.EAX)).thenReturn(SyscallSelector.SYSCALL_EXIT_CODE);
 
-        assertEquals(SyscallExit.class, map.get(runtime));
+        assertEquals(SyscallExit.class, selector.select(runtime));
     }
 
     @Test
@@ -38,7 +38,7 @@ public class SyscallMapTest
         when(runtime.readRegister(Register.EAX)).thenReturn(invalidSyscallCode);
 
         final InstructionExecutionException exception = assertThrows(InstructionExecutionException.class, () -> {
-            map.get(runtime);
+            selector.select(runtime);
         });
         assertEquals("Invalid syscall code: " + invalidSyscallCode, exception.getMessage());
     }

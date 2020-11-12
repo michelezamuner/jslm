@@ -17,7 +17,7 @@ public class InstructionExecutionException extends Exception
     public String getMessage()
     {
         final String message = super.getMessage();
-        
+
         return message != null ? message : "";
     }
 }

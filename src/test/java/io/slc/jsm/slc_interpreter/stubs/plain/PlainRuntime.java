@@ -4,9 +4,9 @@ import io.slc.jsm.slc_interpreter.Runtime;
 
 public class PlainRuntime implements Runtime
 {
-    private int exitStatus;
+    private final int exitStatus;
 
-    public void setExitStatus(final int exitStatus)
+    PlainRuntime(final int exitStatus)
     {
         this.exitStatus = exitStatus;
     }
