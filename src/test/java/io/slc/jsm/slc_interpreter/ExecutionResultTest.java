@@ -1,7 +1,10 @@
 package io.slc.jsm.slc_interpreter;
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SuppressWarnings({"initialization"})
 public class ExecutionResultTest
@@ -37,7 +40,7 @@ public class ExecutionResultTest
         assertEquals(exitStatus, result.getExitStatus());
         assertFalse(result.shouldJump());
 
-        RuntimeException exception = assertThrows(RuntimeException.class, () -> {
+        final RuntimeException exception = assertThrows(RuntimeException.class, () -> {
             result.getJumpAddress();
         });
         assertEquals("No jump has been set", exception.getMessage());
@@ -53,7 +56,7 @@ public class ExecutionResultTest
         assertEquals(jumpAddress, result.getJumpAddress());
         assertFalse(result.shouldExit());
 
-        RuntimeException exception = assertThrows(RuntimeException.class, () -> {
+        final RuntimeException exception = assertThrows(RuntimeException.class, () -> {
             result.getExitStatus();
         });
         assertEquals("No exit has been set", exception.getMessage());

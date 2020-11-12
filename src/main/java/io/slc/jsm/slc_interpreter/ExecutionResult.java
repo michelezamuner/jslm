@@ -1,37 +1,35 @@
 package io.slc.jsm.slc_interpreter;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
+
 public class ExecutionResult
 {
-    private boolean shouldExit;
-    private int exitStatus;
-    private boolean shouldJump;
-    private int jumpAddress;
-    
+    private final boolean shouldExit;
+    private final @Nullable Integer exitStatus;
+    private final boolean shouldJump;
+    private final @Nullable Integer jumpAddress;
+
     public static ExecutionResult proceed()
     {
-        return new ExecutionResult();
+        return new ExecutionResult(null, null);
     }
 
     public static ExecutionResult exit(final int exitStatus)
     {
-        final ExecutionResult result = new ExecutionResult();
-        result.shouldExit = true;
-        result.exitStatus = exitStatus;
-
-        return result;
+        return new ExecutionResult(exitStatus, null);
     }
 
     public static ExecutionResult jump(final int jumpAddress)
     {
-        final ExecutionResult result = new ExecutionResult();
-        result.shouldJump = true;
-        result.jumpAddress = jumpAddress;
-
-        return result;
+        return new ExecutionResult(null, jumpAddress);
     }
 
-    private ExecutionResult()
+    private ExecutionResult(final @Nullable Integer exitStatus, final @Nullable Integer jumpAddress)
     {
+        this.shouldExit = exitStatus != null;
+        this.exitStatus = exitStatus;
+        this.shouldJump = jumpAddress != null;
+        this.jumpAddress = jumpAddress;
     }
 
     public boolean shouldExit()
@@ -41,7 +39,7 @@ public class ExecutionResult
 
     public int getExitStatus()
     {
-        if (!shouldExit()) {
+        if (exitStatus == null) {
             throw new RuntimeException("No exit has been set");
         }
         return exitStatus;
@@ -54,7 +52,7 @@ public class ExecutionResult
 
     public int getJumpAddress()
     {
-        if (!shouldJump()) {
+        if (jumpAddress == null) {
             throw new RuntimeException("No jump has been set");
         }
         return jumpAddress;

@@ -8,7 +8,7 @@ import io.slc.jsm.slc_runtime.SlcRuntime;
 import io.slc.jsm.slc_runtime.Register;
 import io.slc.jsm.slc_instruction_set.SlcInstruction;
 
-public class SyscallMap
+public class SyscallSelector
 {
     static final int SYSCALL_EXIT_CODE = 1;
 
@@ -17,7 +17,7 @@ public class SyscallMap
         put(SYSCALL_EXIT_CODE, SyscallExit.class);
     }};
 
-    public Class<? extends SlcInstruction> get(final SlcRuntime runtime)
+    public Class<? extends SlcInstruction> select(final SlcRuntime runtime)
         throws InstructionExecutionException
     {
         final int syscallCode = runtime.readRegister(Register.EAX);

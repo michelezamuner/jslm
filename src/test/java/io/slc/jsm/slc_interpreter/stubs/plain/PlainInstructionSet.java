@@ -35,11 +35,13 @@ public class PlainInstructionSet implements InstructionSet<PlainRuntime>
         }
     }
 
+    @Override
     public int getInstructionSize()
     {
         return INSTRUCTION_SIZE;
     }
 
+    @Override
     public Instruction<PlainRuntime> get(final int opcode)
         throws InvalidInstructionException
     {

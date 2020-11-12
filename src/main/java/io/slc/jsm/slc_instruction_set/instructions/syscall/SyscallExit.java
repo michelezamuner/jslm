@@ -10,6 +10,7 @@ import io.slc.jsm.slc_runtime.Register;
 
 class SyscallExit implements SlcInstruction
 {
+    @Override
     public ExecutionResult exec(final SlcRuntime runtime, final List<Integer> operands)
         throws InstructionExecutionException
     {

@@ -2,7 +2,8 @@ package io.slc.jsm.slc_instruction_set.instructions.syscall;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import static org.mockito.Mockito.when;
 import org.mockito.junit.jupiter.MockitoExtension;

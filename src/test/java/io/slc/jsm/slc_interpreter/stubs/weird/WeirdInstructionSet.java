@@ -13,6 +13,7 @@ public class WeirdInstructionSet implements InstructionSet<WeirdRuntime>
 
     public static class CounterInstruction implements Instruction<WeirdRuntime>
     {
+        @Override
         public ExecutionResult exec(final WeirdRuntime runtime, final List<Integer> operands)
             throws InstructionExecutionException
         {
@@ -43,11 +44,13 @@ public class WeirdInstructionSet implements InstructionSet<WeirdRuntime>
         }
     }
 
+    @Override
     public int getInstructionSize()
     {
         return INSTRUCTION_SIZE;
     }
 
+    @Override
     public Instruction<WeirdRuntime> get(final int opcode)
     {
         if (opcode == 0xff) {

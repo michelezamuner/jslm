@@ -3,7 +3,7 @@ package io.slc.jsm.vm.interpreter;
 public class ProgramException extends Exception
 {
     private static final long serialVersionUID = 1L;
-    
+
     public ProgramException(final String message)
     {
         super(message);
