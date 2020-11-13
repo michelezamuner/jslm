@@ -246,16 +246,19 @@
                                             <element>CLASS</element>
                                             <excludes>
                                                 <!-- TEMPORARILY NOT IMPLEMENTED -->
-                                                <exclude>*SlcRuntime</exclude>
+                                                <exclude>*slc_runtime.SlcRuntime</exclude>
+                                                <!-- Enums -->
+                                                <exlude>*slc_runtime.Register</exlude>
+                                                <exclude>*slc_instruction_set.Mnemonic</exclude>
+                                                <exclude>*slc_instruction_set.instructions.syscall.Syscall</exclude>
                                                 <!-- DTOs -->
                                                 <!-- Factories -->
-                                                <exclude>*SlcInstructionSet</exclude>
+                                                <exclude>*slc_instruction_set.SlcInstructionSet</exclude>
                                                 <!-- Proxies/Decorators -->
-                                                <exclude>*Syscall</exclude>
-                                                <!-- Exceptions (because of null hack) -->
-                                                <exclude>*InstructionExecutionException</exclude>
-                                                <exclude>*InvalidInstructionException</exclude>
-                                                <exclude>*RuntimeExecutionException</exclude>
+                                                <exclude>*slc_instruction_set.instructions.Syscall</exclude>
+                                                <!-- Exceptions (because of null handling) -->
+                                                <exclude>*slc_interpreter.InstructionExecutionException</exclude>
+                                                <exclude>*slc_interpreter.InvalidInstructionException</exclude>
                                             </excludes>
                                             <limits>
                                                 <limit>

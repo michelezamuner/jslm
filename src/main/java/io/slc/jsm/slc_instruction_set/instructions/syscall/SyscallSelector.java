@@ -10,11 +10,9 @@ import io.slc.jsm.slc_instruction_set.SlcInstruction;
 
 public class SyscallSelector
 {
-    static final int SYSCALL_EXIT_CODE = 1;
-
     @SuppressWarnings("serial")
     private static final Map<Integer, Class<? extends SlcInstruction>> syscalls = new HashMap<Integer, Class<? extends SlcInstruction>>() {{
-        put(SYSCALL_EXIT_CODE, SyscallExit.class);
+        put(Syscall.EXIT, SyscallExit.class);
     }};
 
     public Class<? extends SlcInstruction> select(final SlcRuntime runtime)
