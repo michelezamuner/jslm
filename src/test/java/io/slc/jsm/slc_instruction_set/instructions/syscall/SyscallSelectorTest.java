@@ -25,7 +25,7 @@ public class SyscallSelectorTest
     public void producesSyscallInstructionFromEAXRegister()
         throws InstructionExecutionException
     {
-        when(runtime.readRegister(Register.EAX)).thenReturn(SyscallSelector.SYSCALL_EXIT_CODE);
+        when(runtime.readRegister(Register.EAX)).thenReturn(Syscall.EXIT);
 
         assertEquals(SyscallExit.class, selector.select(runtime));
     }

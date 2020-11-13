@@ -17,7 +17,7 @@ import io.slc.jsm.slc_interpreter.stubs.weird.WeirdRuntime;
 public class ITSlcInterpreter
 {
     @Test
-    public void runProgramWithJumpsAndExits()
+    public void programIsRunWithQuasiDefaultRuntime()
         throws ProgramException
     {
         final Integer expectedExitStatus = 192;
@@ -37,12 +37,11 @@ public class ITSlcInterpreter
         final String[] args = { expectedExitStatus.toString() };
 
         final int exitStatus = interpreter.run(program, args);
-
         assertEquals(expectedExitStatus, exitStatus);
     }
 
     @Test
-    public void runProgramWithDifferentRuntime()
+    public void programIsRunWithDifferentRuntime()
         throws ProgramException
     {
         final int expectedExitStatus = 192;
@@ -69,7 +68,6 @@ public class ITSlcInterpreter
         final String[] args = new String[]{ instructionsToJump.toString(), instructionsToExit.toString() };
 
         final int exitStatus = interpreter.run(program, args);
-
         assertEquals(expectedExitStatus, exitStatus);
     }
 }
