@@ -18,7 +18,7 @@ import io.slc.jsm.slc_instruction_set.SlcInstruction;
 import io.slc.jsm.slc_interpreter.ExecutionResult;
 import io.slc.jsm.slc_interpreter.InstructionExecutionException;
 
-@SuppressWarnings({"initialization"})
+@SuppressWarnings("initialization")
 @ExtendWith(MockitoExtension.class)
 public class SyscallExitTest
 {

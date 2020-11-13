@@ -12,7 +12,6 @@ import io.slc.jsm.slc_runtime.Register;
 import io.slc.jsm.slc_runtime.SlcRuntime;
 import io.slc.jsm.vm.interpreter.ProgramException;
 
-
 public class ITSlcInstructionSet
 {
     @Disabled
