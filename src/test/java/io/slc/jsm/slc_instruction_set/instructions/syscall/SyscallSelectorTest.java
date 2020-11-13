@@ -8,13 +8,14 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import io.slc.jsm.slc_instruction_set.SlcInstruction;
 import io.slc.jsm.slc_interpreter.InstructionExecutionException;
 import io.slc.jsm.slc_runtime.Register;
 import io.slc.jsm.slc_runtime.SlcRuntime;
 
 import org.mockito.Mock;
 
-@SuppressWarnings({"initialization"})
+@SuppressWarnings("initialization")
 @ExtendWith(MockitoExtension.class)
 public class SyscallSelectorTest
 {
@@ -27,14 +28,14 @@ public class SyscallSelectorTest
     {
         when(runtime.readRegister(Register.EAX)).thenReturn(Syscall.EXIT);
 
-        assertEquals(SyscallExit.class, selector.select(runtime));
+        final Class<? extends SlcInstruction> syscallClass = selector.select(runtime);
+        assertEquals(SyscallExit.class, syscallClass);
     }
 
     @Test
     public void failsWhenRequestingInvalidSyscallCode()
     {
         final int invalidSyscallCode = -1;
-
         when(runtime.readRegister(Register.EAX)).thenReturn(invalidSyscallCode);
 
         final InstructionExecutionException exception = assertThrows(InstructionExecutionException.class, () -> {
