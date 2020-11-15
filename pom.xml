@@ -247,8 +247,9 @@
                                             <excludes>
                                                 <!-- TEMPORARILY NOT IMPLEMENTED -->
                                                 <exclude>*slc_runtime.SlcRuntime</exclude>
-                                                <!-- Enums -->
-                                                <exlude>*slc_runtime.Register</exlude>
+                                                <exclude>*slc_runtime.Registers</exclude>
+                                                <!-- Enums and enums-like -->
+                                                <exclude>*slc_runtime.Register</exclude>
                                                 <exclude>*slc_instruction_set.Mnemonic</exclude>
                                                 <exclude>*slc_instruction_set.instructions.syscall.Syscall</exclude>
                                                 <!-- DTOs -->
@@ -259,6 +260,7 @@
                                                 <!-- Exceptions (because of null handling) -->
                                                 <exclude>*slc_interpreter.InstructionExecutionException</exclude>
                                                 <exclude>*slc_interpreter.InvalidInstructionException</exclude>
+                                                <exclude>*slc_runtime.RegistersException</exclude>
                                             </excludes>
                                             <limits>
                                                 <limit>
