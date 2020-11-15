@@ -23,7 +23,6 @@ import io.slc.jsm.slc_interpreter.InstructionExecutionException;
 public class SyscallExitTest
 {
     private SyscallExit instruction = new SyscallExit();
-
     @Mock private SlcRuntime runtime;
 
     @Test

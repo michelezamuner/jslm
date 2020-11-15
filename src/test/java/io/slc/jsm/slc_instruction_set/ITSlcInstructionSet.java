@@ -23,7 +23,7 @@ public class ITSlcInstructionSet
         final int[] bytes = {
             Mnemonic.MOVI, Register.EAX, 0x00, Mnemonic.SYSCALL_EXIT, // set "exit" syscall
             Mnemonic.MOVI, Register.EBX, 0x00, expectedExitStatus, // set exit status for syscall
-            Mnemonic.MOVI, Register.ECX, 0x00, 0x03, // not needed, should do nothing
+            Mnemonic.MOVI, Register.ECX, 0x00, 0x03, // not needed, should be irrelevant
             Mnemonic.SYSCALL, 0x00, 0x00, 0x00, // execute syscall
             Mnemonic.MOVI, Register.EAX, 0x00, Mnemonic.SYSCALL_EXIT, // we should have already terminated here
             Mnemonic.MOVI, Register.EBX, 0x00, 0x04, // we should have already terminated here
