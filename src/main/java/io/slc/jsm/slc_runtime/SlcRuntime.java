@@ -4,13 +4,15 @@ import io.slc.jsm.slc_interpreter.Runtime;
 
 public class SlcRuntime implements Runtime
 {
-    public Registers getRegisters()
+    private final Registers registers;
+
+    public SlcRuntime(final Registers registers)
     {
-        throw new UnsupportedOperationException();
+        this.registers = registers;
     }
 
-    public int readRegister(final int register)
+    public Registers getRegisters()
     {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return registers;
     }
 }

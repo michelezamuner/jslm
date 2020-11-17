@@ -3,12 +3,14 @@ package io.slc.jsm.slc_instruction_set;
 import java.util.HashMap;
 import java.util.Map;
 
+import io.slc.jsm.slc_instruction_set.instructions.Movi;
 import io.slc.jsm.slc_instruction_set.instructions.Syscall;
 import io.slc.jsm.slc_interpreter.InvalidInstructionException;
 
 class InstructionSelector {
     @SuppressWarnings("serial")
     private static final Map<Integer, Class<? extends SlcInstruction>> instructions = new HashMap<Integer, Class<? extends SlcInstruction>>() {{
+        put(Mnemonic.MOVI, Movi.class);
         put(Mnemonic.SYSCALL, Syscall.class);
     }};
 

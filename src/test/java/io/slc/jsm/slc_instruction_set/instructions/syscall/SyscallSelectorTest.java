@@ -1,16 +1,23 @@
 package io.slc.jsm.slc_instruction_set.instructions.syscall;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import static org.mockito.Mockito.when;
+
+import java.util.Arrays;
+
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import io.slc.jsm.slc_instruction_set.SlcInstruction;
 import io.slc.jsm.slc_interpreter.InstructionExecutionException;
 import io.slc.jsm.slc_runtime.Register;
+import io.slc.jsm.slc_runtime.Registers;
+import io.slc.jsm.slc_runtime.RegistersException;
 import io.slc.jsm.slc_runtime.SlcRuntime;
 
 import org.mockito.Mock;
@@ -21,12 +28,19 @@ public class SyscallSelectorTest
 {
     private final SyscallSelector selector = new SyscallSelector();
     @Mock private SlcRuntime runtime;
+    @Mock private Registers registers;
+
+    @BeforeEach
+    public void setUp()
+    {
+        when(runtime.getRegisters()).thenReturn(registers);
+    }
 
     @Test
     public void producesSyscallInstructionFromEAXRegister()
-        throws InstructionExecutionException
+        throws InstructionExecutionException, RegistersException
     {
-        when(runtime.readRegister(Register.EAX)).thenReturn(Syscall.EXIT);
+        when(registers.read(Register.EAX)).thenReturn(Arrays.asList(0, 0, 0, Syscall.EXIT));
 
         final Class<? extends SlcInstruction> syscallClass = selector.select(runtime);
         assertEquals(SyscallExit.class, syscallClass);
@@ -34,13 +48,29 @@ public class SyscallSelectorTest
 
     @Test
     public void failsWhenRequestingInvalidSyscallCode()
+        throws RegistersException
     {
-        final int invalidSyscallCode = -1;
-        when(runtime.readRegister(Register.EAX)).thenReturn(invalidSyscallCode);
+        final int invalidSyscallCode = 0xff;
+        when(registers.read(Register.EAX)).thenReturn(Arrays.asList(0, 0, 0, invalidSyscallCode));
 
         final InstructionExecutionException exception = assertThrows(InstructionExecutionException.class, () -> {
             selector.select(runtime);
         });
         assertEquals("Invalid syscall code: " + invalidSyscallCode, exception.getMessage());
+    }
+
+    @Test
+    public void failsWhenReadingRegisterFails()
+        throws RegistersException
+    {
+        final String message = "error message";
+        final RegistersException original = new RegistersException(message);
+        when(registers.read(Register.EAX)).thenThrow(original);
+
+        final InstructionExecutionException exception = assertThrows(InstructionExecutionException.class, () -> {
+            selector.select(runtime);
+        });
+        assertEquals(message, exception.getMessage());
+        assertSame(original, exception.getCause());
     }
 }
