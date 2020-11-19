@@ -43,7 +43,7 @@ public class MoviTest
     public void doesNotCauseJumpNorExit()
         throws InstructionExecutionException
     {
-        final List<Integer> operands = Arrays.asList(Register.EAX, 0x00, 0x00);
+        final List<Integer> operands = Arrays.asList(Register.EAX.getAddress(), 0x00, 0x00);
 
         final ExecutionResult result = instruction.exec(runtime, operands);
         assertFalse(result.shouldJump());
@@ -60,7 +60,7 @@ public class MoviTest
         final int valueFirstByte = 0x00;
         final int valueSecondByte = 0x00;
         final List<Integer> operands = Arrays.asList(register, valueFirstByte, valueSecondByte);
-        doThrow(original).when(registers).write(register, valueFirstByte, valueSecondByte);
+        doThrow(original).when(registers).write(register, Arrays.asList(0, 0, valueFirstByte, valueSecondByte));
 
         final InstructionExecutionException exception = assertThrows(InstructionExecutionException.class, () -> {
             instruction.exec(runtime, operands);

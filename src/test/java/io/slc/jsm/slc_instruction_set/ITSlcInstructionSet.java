@@ -2,7 +2,6 @@ package io.slc.jsm.slc_instruction_set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import io.slc.jsm.slc_instruction_set.stubs.StubBuffer;
@@ -14,19 +13,18 @@ import io.slc.jsm.vm.interpreter.ProgramException;
 
 public class ITSlcInstructionSet
 {
-    @Disabled
     @Test
     public void programIsTerminatedWithSpecificExitStatus()
         throws ProgramException
     {
         final Integer expectedExitStatus = 192;
         final int[] bytes = {
-            Mnemonic.MOVI, Register.EAX, 0x00, Mnemonic.SYSCALL_EXIT, // set "exit" syscall
-            Mnemonic.MOVI, Register.EBX, 0x00, expectedExitStatus, // set exit status for syscall
-            Mnemonic.MOVI, Register.ECX, 0x00, 0x03, // not needed, should be irrelevant
+            Mnemonic.MOVI, Register.EAX.getAddress(), 0x00, Mnemonic.SYSCALL_EXIT, // set "exit" syscall
+            Mnemonic.MOVI, Register.EBX.getAddress(), 0x00, expectedExitStatus, // set exit status for syscall
+            Mnemonic.MOVI, Register.ECX.getAddress(), 0x00, 0x03, // not needed, should be irrelevant
             Mnemonic.SYSCALL, 0x00, 0x00, 0x00, // execute syscall
-            Mnemonic.MOVI, Register.EAX, 0x00, Mnemonic.SYSCALL_EXIT, // we should have already terminated here
-            Mnemonic.MOVI, Register.EBX, 0x00, 0x04, // we should have already terminated here
+            Mnemonic.MOVI, Register.EAX.getAddress(), 0x00, Mnemonic.SYSCALL_EXIT, // we should have already terminated here
+            Mnemonic.MOVI, Register.EBX.getAddress(), 0x00, 0x04, // we should have already terminated here
             Mnemonic.SYSCALL, 0x00, 0x00, 0x00 // we should have already terminated here
         };
 

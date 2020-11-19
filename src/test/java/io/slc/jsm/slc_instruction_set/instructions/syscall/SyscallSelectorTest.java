@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import static org.mockito.Mockito.when;
@@ -17,7 +16,6 @@ import io.slc.jsm.slc_instruction_set.SlcInstruction;
 import io.slc.jsm.slc_interpreter.InstructionExecutionException;
 import io.slc.jsm.slc_runtime.Register;
 import io.slc.jsm.slc_runtime.Registers;
-import io.slc.jsm.slc_runtime.RegistersException;
 import io.slc.jsm.slc_runtime.SlcRuntime;
 
 import org.mockito.Mock;
@@ -38,7 +36,7 @@ public class SyscallSelectorTest
 
     @Test
     public void producesSyscallInstructionFromEAXRegister()
-        throws InstructionExecutionException, RegistersException
+        throws InstructionExecutionException
     {
         when(registers.read(Register.EAX)).thenReturn(Arrays.asList(0, 0, 0, Syscall.EXIT));
 
@@ -48,7 +46,6 @@ public class SyscallSelectorTest
 
     @Test
     public void failsWhenRequestingInvalidSyscallCode()
-        throws RegistersException
     {
         final int invalidSyscallCode = 0xff;
         when(registers.read(Register.EAX)).thenReturn(Arrays.asList(0, 0, 0, invalidSyscallCode));
@@ -57,20 +54,5 @@ public class SyscallSelectorTest
             selector.select(runtime);
         });
         assertEquals("Invalid syscall code: " + invalidSyscallCode, exception.getMessage());
-    }
-
-    @Test
-    public void failsWhenReadingRegisterFails()
-        throws RegistersException
-    {
-        final String message = "error message";
-        final RegistersException original = new RegistersException(message);
-        when(registers.read(Register.EAX)).thenThrow(original);
-
-        final InstructionExecutionException exception = assertThrows(InstructionExecutionException.class, () -> {
-            selector.select(runtime);
-        });
-        assertEquals(message, exception.getMessage());
-        assertSame(original, exception.getCause());
     }
 }
