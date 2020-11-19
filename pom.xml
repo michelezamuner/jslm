@@ -247,7 +247,6 @@
                                             <excludes>
                                                 <!-- TEMPORARILY NOT IMPLEMENTED -->
                                                 <exclude>*slc_runtime.SlcRuntime</exclude>
-                                                <exclude>*slc_runtime.Registers</exclude>
                                                 <!-- Enums and enums-like -->
                                                 <exclude>*slc_runtime.Register</exclude>
                                                 <exclude>*slc_instruction_set.Mnemonic</exclude>

@@ -9,4 +9,7 @@
     <Match>
         <Bug pattern="WEM_WEAK_EXCEPTION_MESSAGING" />
     </Match>
+    <Match>
+        <Bug pattern="CLI_CONSTANT_LIST_INDEX" />
+    </Match>
 </FindBugsFilter>
