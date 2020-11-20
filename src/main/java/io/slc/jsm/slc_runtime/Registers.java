@@ -1,91 +1,82 @@
 package io.slc.jsm.slc_runtime;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 public class Registers
 {
     private final static Set<Integer> ROWS_ADDRESSES = new HashSet<>(Arrays.asList(0b00, 0b01, 0b10, 0b11));
-    private final Integer[][] data = new Integer[4][4];
+    private final int[][] data = new int[4][4];
 
-    public void write(final int address, final List<Integer> bytes)
+    public void write(final int address, final int[] bytes)
         throws RegistersException
     {
         final int rowAddress = getRowAddress(address);
         final int dataAddress = getDataAddress(address);
+        if (bytes.length != 4) {
+            throw new RegistersException("Invalid register data size: should be 4, got " + bytes.length);
+        }
 
         // E*X
         if (dataAddress == 0b00) {
-            if (bytes.size() != 4) {
-                throw new RegistersException("Invalid register data size: should be 4, got " + bytes.size());
-            }
             for (int i = 0; i < 4; i++) {
-                data[rowAddress][i] = bytes.get(i);
+                data[rowAddress][i] = bytes[i];
             }
             return;
         }
 
         // *X
         if (dataAddress == 0b01) {
-            if (bytes.size() != 2) {
-                throw new RegistersException("Invalid register data size: should be 2, got " + bytes.size());
-            }
             for (int i = 2; i < 4; i++) {
-                data[rowAddress][i] = bytes.get(i - 2);
+                data[rowAddress][i] = bytes[i];
             }
             return;
         }
 
         // *H
         if (dataAddress == 0b10) {
-            if (bytes.size() != 1) {
-                throw new RegistersException("Invalid register data size: should be 1, got " + bytes.size());
-            }
-            data[rowAddress][2] = bytes.get(0);
+            data[rowAddress][2] = bytes[3];
             return;
         }
 
         // *L
-        if (bytes.size() != 1) {
-            throw new RegistersException("Invalid register data size: should be 1, got " + bytes.size());
-        }
-        data[rowAddress][3] = bytes.get(0);
+        data[rowAddress][3] = bytes[3];
     }
 
-    public List<Integer> read(final int address)
+    public int[] read(final int address)
         throws RegistersException
     {
         return getData(getRowAddress(address), getDataAddress(address));
     }
 
-    public List<Integer> read(final Register register)
+    public int[] read(final Register register)
     {
         final int address = register.getAddress();
+
         return getData(getUncheckedRowAddress(address), getDataAddress(address));
     }
 
-    private List<Integer> getData(final int rowAddress, final int dataAddress)
+    private int[] getData(final int rowAddress, final int dataAddress)
     {
-         // E*X
+        final int[] original = data[rowAddress];
+        // E*X
         if (dataAddress == 0b00) {
-            return Arrays.asList(data[rowAddress]);
+            return new int[]{original[0], original[1], original[2], original[3]};
         }
 
         // *X
         if (dataAddress == 0b01) {
-            return Arrays.asList(data[rowAddress]).subList(2, 4);
+            return new int[]{0, 0, original[2], original[3]};
         }
 
         // *H
         if (dataAddress == 0b10) {
-            return Collections.singletonList(data[rowAddress][2]);
+            return new int[]{0, 0, 0, original[2]};
         }
 
         // *L
-        return Collections.singletonList(data[rowAddress][3]);
+        return new int[]{0, 0, 0, original[3]};
     }
 
     private int getRowAddress(final int address)
@@ -99,13 +90,13 @@ public class Registers
         return rowAddress;
     }
 
-    private int getDataAddress(final int address)
-    {
-        return address & 0b11;
-    }
-
     private int getUncheckedRowAddress(final int address)
     {
         return address >> 2;
+    }
+
+    private int getDataAddress(final int address)
+    {
+        return address & 0b11;
     }
 }

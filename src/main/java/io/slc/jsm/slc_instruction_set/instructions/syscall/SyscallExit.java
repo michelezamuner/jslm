@@ -14,7 +14,7 @@ public class SyscallExit implements SlcInstruction
     public ExecutionResult exec(final SlcRuntime runtime, final List<Integer> operands)
         throws InstructionExecutionException
     {
-        final int exitStatus = runtime.getRegisters().read(Register.EBX).get(3);
+        final int exitStatus = runtime.getRegisters().read(Register.EBX)[3];
 
         return ExecutionResult.exit(exitStatus);
     }

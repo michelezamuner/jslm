@@ -60,7 +60,7 @@ public class MoviTest
         final int valueFirstByte = 0x00;
         final int valueSecondByte = 0x00;
         final List<Integer> operands = Arrays.asList(register, valueFirstByte, valueSecondByte);
-        doThrow(original).when(registers).write(register, Arrays.asList(0, 0, valueFirstByte, valueSecondByte));
+        doThrow(original).when(registers).write(register, new int[]{0, 0, valueFirstByte, valueSecondByte});
 
         final InstructionExecutionException exception = assertThrows(InstructionExecutionException.class, () -> {
             instruction.exec(runtime, operands);
