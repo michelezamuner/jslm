@@ -1,6 +1,5 @@
 package io.slc.jsm.slc_instruction_set.instructions;
 
-import java.util.Arrays;
 import java.util.List;
 
 import io.slc.jsm.slc_instruction_set.SlcInstruction;
@@ -22,7 +21,7 @@ public class Movi implements SlcInstruction
         final int secondByte = operands.get(2);
 
         try {
-            registers.write(register, Arrays.asList(0, 0, firstByte, secondByte));
+            registers.write(register, new int[]{0, 0, firstByte, secondByte});
         } catch (RegistersException e) {
             throw new InstructionExecutionException(e.getMessage(), e);
         }

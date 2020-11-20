@@ -38,7 +38,7 @@ public class SyscallSelectorTest
     public void producesSyscallInstructionFromEAXRegister()
         throws InstructionExecutionException
     {
-        when(registers.read(Register.EAX)).thenReturn(Arrays.asList(0, 0, 0, Syscall.EXIT));
+        when(registers.read(Register.EAX)).thenReturn(new int[]{0, 0, 0, Syscall.EXIT});
 
         final Class<? extends SlcInstruction> syscallClass = selector.select(runtime);
         assertEquals(SyscallExit.class, syscallClass);
@@ -48,7 +48,7 @@ public class SyscallSelectorTest
     public void failsWhenRequestingInvalidSyscallCode()
     {
         final int invalidSyscallCode = 0xff;
-        when(registers.read(Register.EAX)).thenReturn(Arrays.asList(0, 0, 0, invalidSyscallCode));
+        when(registers.read(Register.EAX)).thenReturn(new int[]{0, 0, 0, invalidSyscallCode});
 
         final InstructionExecutionException exception = assertThrows(InstructionExecutionException.class, () -> {
             selector.select(runtime);

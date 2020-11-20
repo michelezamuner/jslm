@@ -18,7 +18,7 @@ public class SyscallSelector
     public Class<? extends SlcInstruction> select(final SlcRuntime runtime)
         throws InstructionExecutionException
     {
-        final int syscallCode = runtime.getRegisters().read(Register.EAX).get(3);
+        final int syscallCode = runtime.getRegisters().read(Register.EAX)[3];
         final Class<? extends SlcInstruction> syscallClass = syscalls.get(syscallCode);
         if (syscallClass == null) {
             throw new InstructionExecutionException("Invalid syscall code: " + syscallCode);

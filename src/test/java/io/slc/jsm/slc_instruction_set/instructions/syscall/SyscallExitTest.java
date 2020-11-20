@@ -43,7 +43,7 @@ public class SyscallExitTest
         final List<Integer> operands = new ArrayList<>();
         final int exitStatus = 192;
         when(runtime.getRegisters()).thenReturn(registers);
-        when(registers.read(Register.EBX)).thenReturn(Arrays.asList(0, 0, 0, exitStatus));
+        when(registers.read(Register.EBX)).thenReturn(new int[]{0, 0, 0, exitStatus});
 
         final ExecutionResult result = instruction.exec(runtime, operands);
         assertTrue(result.shouldExit());
