@@ -6,11 +6,11 @@ import io.slc.jsm.slc_interpreter.ExecutionResult;
 import io.slc.jsm.slc_interpreter.InstructionExecutionException;
 import io.slc.jsm.slc_runtime.SlcRuntime;
 import io.slc.jsm.slc_instruction_set.SlcInstruction;
-import io.slc.jsm.slc_instruction_set.instructions.syscall.SyscallSelector;
+import io.slc.jsm.slc_instruction_set.instructions.syscall.Selector;
 
 public class Syscall implements SlcInstruction
 {
-    private final SyscallSelector selector = new SyscallSelector();
+    private final Selector selector = new Selector();
 
     @Override
     public ExecutionResult exec(final SlcRuntime runtime, final List<Integer> operands)
