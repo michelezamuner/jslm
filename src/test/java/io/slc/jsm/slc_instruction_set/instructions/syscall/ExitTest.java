@@ -24,9 +24,9 @@ import io.slc.jsm.slc_interpreter.InstructionExecutionException;
 
 @SuppressWarnings("initialization")
 @ExtendWith(MockitoExtension.class)
-public class SyscallExitTest
+public class ExitTest
 {
-    private SyscallExit instruction = new SyscallExit();
+    private Exit instruction = new Exit();
     @Mock private SlcRuntime runtime;
     @Mock private Registers registers;
 

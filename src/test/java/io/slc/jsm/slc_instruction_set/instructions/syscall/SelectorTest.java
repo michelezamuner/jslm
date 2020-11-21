@@ -8,8 +8,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import static org.mockito.Mockito.when;
 
-import java.util.Arrays;
-
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import io.slc.jsm.slc_instruction_set.SlcInstruction;
@@ -22,9 +20,9 @@ import org.mockito.Mock;
 
 @SuppressWarnings("initialization")
 @ExtendWith(MockitoExtension.class)
-public class SyscallSelectorTest
+public class SelectorTest
 {
-    private final SyscallSelector selector = new SyscallSelector();
+    private final Selector selector = new Selector();
     @Mock private SlcRuntime runtime;
     @Mock private Registers registers;
 
@@ -38,10 +36,10 @@ public class SyscallSelectorTest
     public void producesSyscallInstructionFromEAXRegister()
         throws InstructionExecutionException
     {
-        when(registers.read(Register.EAX)).thenReturn(new int[]{0, 0, 0, Syscall.EXIT});
+        when(registers.read(Register.EAX)).thenReturn(new int[]{0, 0, 0, Type.EXIT});
 
         final Class<? extends SlcInstruction> syscallClass = selector.select(runtime);
-        assertEquals(SyscallExit.class, syscallClass);
+        assertEquals(Exit.class, syscallClass);
     }
 
     @Test

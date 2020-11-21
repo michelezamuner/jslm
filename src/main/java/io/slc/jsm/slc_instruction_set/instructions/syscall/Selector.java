@@ -8,11 +8,11 @@ import io.slc.jsm.slc_runtime.SlcRuntime;
 import io.slc.jsm.slc_runtime.Register;
 import io.slc.jsm.slc_instruction_set.SlcInstruction;
 
-public class SyscallSelector
+public class Selector
 {
     @SuppressWarnings("serial")
     private static final Map<Integer, Class<? extends SlcInstruction>> syscalls = new HashMap<Integer, Class<? extends SlcInstruction>>() {{
-        put(Syscall.EXIT, SyscallExit.class);
+        put(Type.EXIT, Exit.class);
     }};
 
     public Class<? extends SlcInstruction> select(final SlcRuntime runtime)

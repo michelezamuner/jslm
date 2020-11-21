@@ -8,7 +8,7 @@ import io.slc.jsm.slc_interpreter.InstructionExecutionException;
 import io.slc.jsm.slc_runtime.SlcRuntime;
 import io.slc.jsm.slc_runtime.Register;
 
-public class SyscallExit implements SlcInstruction
+public class Exit implements SlcInstruction
 {
     @Override
     public ExecutionResult exec(final SlcRuntime runtime, final List<Integer> operands)

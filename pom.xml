@@ -250,7 +250,7 @@
                                                 <!-- Enums and enums-like -->
                                                 <exclude>*slc_runtime.Register</exclude>
                                                 <exclude>*slc_instruction_set.Mnemonic</exclude>
-                                                <exclude>*slc_instruction_set.instructions.syscall.Syscall</exclude>
+                                                <exclude>*slc_instruction_set.instructions.syscall.Type</exclude>
                                                 <!-- DTOs -->
                                                 <!-- Factories -->
                                                 <exclude>*slc_instruction_set.SlcInstructionSet</exclude>
